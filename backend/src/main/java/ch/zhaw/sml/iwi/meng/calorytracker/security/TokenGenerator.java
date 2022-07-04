@@ -1,4 +1,4 @@
-package ch.zhaw.sml.iwi.meng.leantodo.security;
+package ch.zhaw.sml.iwi.meng.calorytracker.security;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import ch.zhaw.sml.iwi.meng.leantodo.entity.User;
-import ch.zhaw.sml.iwi.meng.leantodo.entity.UserRepository;
+import ch.zhaw.sml.iwi.meng.calorytracker.entity.User;
+import ch.zhaw.sml.iwi.meng.calorytracker.entity.UserRepository;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 

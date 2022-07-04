@@ -1,4 +1,4 @@
-package ch.zhaw.sml.iwi.meng.leantodo.entity;
+package ch.zhaw.sml.iwi.meng.calorytracker.entity;
 
 import java.util.ArrayList;
 import java.util.List;

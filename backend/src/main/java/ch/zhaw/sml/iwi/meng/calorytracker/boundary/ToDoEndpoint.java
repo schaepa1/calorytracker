@@ -1,4 +1,4 @@
-package ch.zhaw.sml.iwi.meng.leantodo.boundary;
+package ch.zhaw.sml.iwi.meng.calorytracker.boundary;
 
 import java.security.Principal;
 import java.util.List;
@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import ch.zhaw.sml.iwi.meng.leantodo.controller.ToDoController;
-import ch.zhaw.sml.iwi.meng.leantodo.entity.ToDo;
+import ch.zhaw.sml.iwi.meng.calorytracker.controller.ToDoController;
+import ch.zhaw.sml.iwi.meng.calorytracker.entity.ToDo;
 
 @RestController
 public class ToDoEndpoint {

@@ -1,4 +1,4 @@
-package ch.zhaw.sml.iwi.meng.leantodo.security;
+package ch.zhaw.sml.iwi.meng.calorytracker.security;
 
 import java.util.ArrayList;
 import java.util.Collection;

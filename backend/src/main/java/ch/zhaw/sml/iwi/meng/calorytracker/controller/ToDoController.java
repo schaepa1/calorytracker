@@ -1,12 +1,12 @@
-package ch.zhaw.sml.iwi.meng.leantodo.controller;
+package ch.zhaw.sml.iwi.meng.calorytracker.controller;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import ch.zhaw.sml.iwi.meng.leantodo.entity.ToDo;
-import ch.zhaw.sml.iwi.meng.leantodo.entity.ToDoRepository;
+import ch.zhaw.sml.iwi.meng.calorytracker.entity.ToDo;
+import ch.zhaw.sml.iwi.meng.calorytracker.entity.ToDoRepository;
 
 @Component
 public class ToDoController {
