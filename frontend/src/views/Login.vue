@@ -5,20 +5,20 @@
         <ion-row justify-content-center>
           <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
             <div text-center>
-              <h1>LeanTodo login</h1>
+              <h1>Calory Tracker</h1>
             </div>
             <div padding>
               <ion-item>
                 <ion-input
                   type="text"
-                  placeholder="Login Name"
+                  placeholder="Benutzername"
                   v-model="username"
                 ></ion-input>
               </ion-item>
               <ion-item>
                 <ion-input
                   type="password"
-                  placeholder="Password"
+                  placeholder="Passwort"
                   v-model="password"
                 ></ion-input>
               </ion-item>
