@@ -91,7 +91,7 @@ export default {
         productDescription: '',
         productCalories: null,
         productConsumeTime: new Date(),
-        productEan: null,
+        productEan: '',
       },
       newCaloryTrackDay: {
         caloryTrackDayDate: new Date(),
