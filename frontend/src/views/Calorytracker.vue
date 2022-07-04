@@ -55,7 +55,7 @@
               </ion-col>
               <ion-col>
                 <h1 class="ion-float-right">
-                  <b> 300 kcal</b>
+                  <b> {{calculateDailyTotalCalory()}} kcal</b>
                 </h1>
               </ion-col>
             </ion-row>
@@ -124,5 +124,16 @@ export default defineComponent({
       ],
     }
   },
+  methods: {
+    calculateDailyTotalCalory() {
+     
+      var total = 0;
+      this.allProducts.forEach(product => {
+        total += product.productCalories
+      })
+       console.log("Total Daily Calory Intake Test: "+total);
+       return total;
+    }
+  }
 });
 </script>
