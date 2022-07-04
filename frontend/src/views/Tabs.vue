@@ -2,7 +2,7 @@
   <ion-page>
     <ion-tabs>
       <ion-router-outlet></ion-router-outlet>
-      
+
       <ion-tab-bar slot="bottom">
         <ion-tab-button tab="calorytracker" href="/tabs/calorytracker">
           <ion-icon :icon="fastFood" />
@@ -17,13 +17,6 @@
           <ion-icon :icon="flash" />
           <ion-label>Todo</ion-label>
         </ion-tab-button>
-          
-        <ion-tab-button tab="projects" href="/tabs/projects">
-          <ion-icon :icon="apps" />
-          <ion-label>Projects</ion-label>
-        </ion-tab-button>
-        
-        
       </ion-tab-bar>
     </ion-tabs>
   </ion-page>
@@ -39,8 +32,8 @@ export default {
   setup() {
     return {
       add,
-      flash, 
-      apps, 
+      flash,
+      apps,
       send,
       fastFood
     }

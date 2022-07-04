@@ -8,7 +8,7 @@
     <ion-content :fullscreen="true">
       <ion-grid>
         <ion-row justify-content-center>
-          <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+          <ion-col align-self-center>
             <ion-header collapse="condense">
               <ion-toolbar>
                 <ion-title size="large">Produkt erfassen</ion-title>
@@ -55,6 +55,7 @@
 </template>
 
 <script lang="ts">
+import { defineComponent } from 'vue';
 import {
   IonPage,
   IonHeader,
@@ -67,9 +68,11 @@ import {
   IonItem,
   IonButton,
   IonInput,
+  IonLabel,
+  IonTextarea,
 } from "@ionic/vue";
 
-export default {
+export default defineComponent({
   name: "Todo",
   components: {
     IonHeader,
@@ -83,6 +86,8 @@ export default {
     IonItem,
     IonButton,
     IonInput,
+    IonLabel,
+    IonTextarea,
   },
   data() {
     return {
@@ -90,18 +95,28 @@ export default {
         productName: '',
         productDescription: '',
         productCalories: null,
-        productConsumeTime: new Date(),
+        productConsumeTime: new Date().toLocaleTimeString().slice(0,5),
         productEan: '',
       },
       newCaloryTrackDay: {
-        caloryTrackDayDate: new Date(),
+        caloryTrackDayDate: new Date().toISOString().split('T')[0]
       }
-    }
+    };
   },
   methods: {
-    async addNewProduct() {
+    addNewProduct() {
       console.log("NEUES PRODUKT HINZUGEFÜGT");
+      this.newProduct = {
+        productName: '',
+        productDescription: '',
+        productCalories: null,
+        productConsumeTime: new Date().toLocaleTimeString().slice(0,5),
+        productEan: '',
+      };
+      this.newCaloryTrackDay = {
+        caloryTrackDayDate: new Date().toISOString().split('T')[0],
+      };
     }
   }
-};
+});
 </script>
