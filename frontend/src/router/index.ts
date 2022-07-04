@@ -33,8 +33,8 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('@/views/Projects.vue')
       },
       {
-        path: 'timerecord',
-        component: () => import('@/views/Timerecord.vue')
+        path: 'calorytracker',
+        component: () => import('@/views/Calorytracker.vue')
       }
     ]
   }

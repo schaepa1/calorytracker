@@ -2,7 +2,7 @@
   <ion-page>
     <ion-header>
       <ion-toolbar>
-        <ion-title>Timerecord</ion-title>
+        <ion-title>Calory Tracker</ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content :fullscreen="true">
