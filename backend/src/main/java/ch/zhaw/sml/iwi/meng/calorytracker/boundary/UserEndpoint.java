@@ -1,4 +1,4 @@
-package ch.zhaw.sml.iwi.meng.leantodo.boundary;
+package ch.zhaw.sml.iwi.meng.calorytracker.boundary;
 
 import java.security.Principal;
 

@@ -1,4 +1,4 @@
-package ch.zhaw.sml.iwi.meng.leantodo.security.configuration;
+package ch.zhaw.sml.iwi.meng.calorytracker.security.configuration;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
@@ -9,25 +9,25 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import ch.zhaw.sml.iwi.meng.leantodo.security.TokenAuthenticationFilter;
+import ch.zhaw.sml.iwi.meng.calorytracker.security.TokenAuthenticationFilter;
 
 
 @Configuration
-@Order(3)
-public class TokenCookieAuthSecurityConfigAuth extends WebSecurityConfigurerAdapter {
-
+@Order(1)
+public class TokenCookieAuthSecurityConfigAPI extends WebSecurityConfigurerAdapter {
    
     @Value("${jwt.secret}")
     private String secret;
     
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.antMatcher("/auth/**")
+        http.csrf().disable();
+        http.antMatcher("/api/**")
                 .addFilterBefore(new TokenAuthenticationFilter(secret), UsernamePasswordAuthenticationFilter.class)
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .httpBasic().disable()
                 .authorizeRequests()
-                    .antMatchers(HttpMethod.OPTIONS,"/auth/**").permitAll()
+                    .antMatchers(HttpMethod.OPTIONS,"/api/**").permitAll()
                 .anyRequest().authenticated();        
     }   
     

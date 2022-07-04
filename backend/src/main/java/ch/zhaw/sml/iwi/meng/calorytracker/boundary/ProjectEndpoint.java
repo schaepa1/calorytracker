@@ -1,4 +1,4 @@
-package ch.zhaw.sml.iwi.meng.leantodo.boundary;
+package ch.zhaw.sml.iwi.meng.calorytracker.boundary;
 
 import java.security.Principal;
 import java.util.List;
@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import ch.zhaw.sml.iwi.meng.leantodo.controller.ProjectController;
-import ch.zhaw.sml.iwi.meng.leantodo.entity.Project;
-import ch.zhaw.sml.iwi.meng.leantodo.entity.ToDo;
+import ch.zhaw.sml.iwi.meng.calorytracker.controller.ProjectController;
+import ch.zhaw.sml.iwi.meng.calorytracker.entity.Project;
+import ch.zhaw.sml.iwi.meng.calorytracker.entity.ToDo;
 
 @RestController
 public class ProjectEndpoint {

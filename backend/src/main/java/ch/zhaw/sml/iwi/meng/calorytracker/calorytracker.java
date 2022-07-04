@@ -1,4 +1,4 @@
-package ch.zhaw.sml.iwi.meng.leantodo;
+package ch.zhaw.sml.iwi.meng.calorytracker;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -11,20 +11,20 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import ch.zhaw.sml.iwi.meng.leantodo.entity.Role;
-import ch.zhaw.sml.iwi.meng.leantodo.entity.RoleRepository;
-import ch.zhaw.sml.iwi.meng.leantodo.entity.ToDo;
-import ch.zhaw.sml.iwi.meng.leantodo.entity.ToDoRepository;
-import ch.zhaw.sml.iwi.meng.leantodo.entity.User;
-import ch.zhaw.sml.iwi.meng.leantodo.entity.UserRepository;
+import ch.zhaw.sml.iwi.meng.calorytracker.entity.Role;
+import ch.zhaw.sml.iwi.meng.calorytracker.entity.RoleRepository;
+import ch.zhaw.sml.iwi.meng.calorytracker.entity.ToDo;
+import ch.zhaw.sml.iwi.meng.calorytracker.entity.ToDoRepository;
+import ch.zhaw.sml.iwi.meng.calorytracker.entity.User;
+import ch.zhaw.sml.iwi.meng.calorytracker.entity.UserRepository;
 
 @SpringBootApplication
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
-public class LeanToDo implements CommandLineRunner {
+public class calorytracker implements CommandLineRunner {
 
     public static void main(String[] args) {
-        SpringApplication.run(LeanToDo.class, args);
+        SpringApplication.run(calorytracker.class, args);
         
     }
 

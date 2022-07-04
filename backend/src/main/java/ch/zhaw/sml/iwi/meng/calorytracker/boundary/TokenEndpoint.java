@@ -1,4 +1,4 @@
-package ch.zhaw.sml.iwi.meng.leantodo.boundary;
+package ch.zhaw.sml.iwi.meng.calorytracker.boundary;
 
 import java.security.Principal;
 
@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import ch.zhaw.sml.iwi.meng.leantodo.security.TokenGenerator;
-import ch.zhaw.sml.iwi.meng.leantodo.security.UserAuthResponse;
+import ch.zhaw.sml.iwi.meng.calorytracker.security.TokenGenerator;
+import ch.zhaw.sml.iwi.meng.calorytracker.security.UserAuthResponse;
 
 @RestController
 public class TokenEndpoint {
