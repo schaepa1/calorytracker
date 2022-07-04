@@ -35,7 +35,7 @@
                 <ion-label position="stacked">
                   Konsumdatum
                 </ion-label>
-                <ion-input type="date" v-model="newCaloryTrackDay.caloryTrackDayDate" required></ion-input>
+                <ion-input type="date" v-model="newProduct.productConsumeDate" required></ion-input>
               </ion-item>
               <ion-item>
                 <ion-label position="stacked">
@@ -73,7 +73,7 @@ import {
 } from "@ionic/vue";
 
 export default defineComponent({
-  name: "Todo",
+  name: "NewProduct",
   components: {
     IonHeader,
     IonToolbar,
@@ -95,12 +95,10 @@ export default defineComponent({
         productName: '',
         productDescription: '',
         productCalories: null,
+        productConsumeDate: new Date().toISOString().split('T')[0],
         productConsumeTime: new Date().toLocaleTimeString().slice(0,5),
         productEan: '',
       },
-      newCaloryTrackDay: {
-        caloryTrackDayDate: new Date().toISOString().split('T')[0]
-      }
     };
   },
   methods: {
@@ -110,11 +108,9 @@ export default defineComponent({
         productName: '',
         productDescription: '',
         productCalories: null,
+        productConsumeDate: new Date().toISOString().split('T')[0],
         productConsumeTime: new Date().toLocaleTimeString().slice(0,5),
         productEan: '',
-      };
-      this.newCaloryTrackDay = {
-        caloryTrackDayDate: new Date().toISOString().split('T')[0],
       };
     }
   }

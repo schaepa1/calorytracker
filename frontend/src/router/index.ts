@@ -21,17 +21,21 @@ const routes: Array<RouteRecordRaw> = [
         redirect: '/tabs/tab1'
       },
       {
+        path: 'dailyConsumption',
+        component: () => import('@/views/DailyConsumption.vue')
+      },
+      {
         path: 'newProduct',
         component: () => import('@/views/NewProduct.vue')
+      },
+      {
+        path: 'demandCalculator',
+        component: () => import('@/views/DemandCalculator.vue')
       },
       {
         path: 'todo',
         component: () => import('@/views/Todo.vue')
       },
-      {
-        path: 'calorytracker',
-        component: () => import('@/views/Calorytracker.vue')
-      }
     ]
   }
 ]

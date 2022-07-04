@@ -2,13 +2,13 @@
   <ion-page>
     <ion-header>
       <ion-toolbar>
-        <ion-title>Calory Tracker</ion-title>
+        <ion-title>Tageskonsum vom {{allProducts[0].productConsumeDate}}</ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content :fullscreen="true">
       <ion-header collapse="condense">
         <ion-toolbar>
-          <ion-title size="large">Timerecord</ion-title>
+          <ion-title size="large">Tageskonsum vom {{allProducts[0].productConsumeDate}}</ion-title>
         </ion-toolbar>
       </ion-header>
 
@@ -49,7 +49,7 @@
               <ion-col>
                 <ion-text>
                   <div>
-                    Kalorien Total am {{ this.allProducts[0].productConsumeTime}}
+                    Kalorien Total am {{ this.allProducts[0].productConsumeDate }}
                   </div>
                 </ion-text>
               </ion-col>
@@ -67,11 +67,11 @@
 </template>
 
 <script lang="ts">
-import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonIcon, IonItem, IonLabel, IonCol, IonGrid, IonRow, IonCard, IonText, IonTextarea } from '@ionic/vue';
+import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCol, IonGrid, IonRow, IonCard, IonText } from '@ionic/vue';
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-  name: 'Calorytracker',
+  name: 'DailyConsumption',
   components: {
     IonHeader,
     IonToolbar,
@@ -87,8 +87,6 @@ export default defineComponent({
     IonGrid,
     IonRow,
     IonText,
-    IonTextarea,
-    IonLabel
   },
   data() {
     return {
@@ -97,28 +95,32 @@ export default defineComponent({
           productName: 'Essen 1',
           productDescription: 'Beschreibung 1',
           productCalories: 500,
-          productConsumeTime: new Date(),
+          productConsumeDate: new Date().toISOString().split('T')[0],
+          productConsumeTime: new Date().toLocaleTimeString().slice(0,5),
           productEan: '4 003994 155486',
         },
         {
           productName: 'Essen 2',
           productDescription: 'Beschreibung 2',
           productCalories: 150,
-          productConsumeTime: new Date(),
+          productConsumeDate: new Date().toISOString().split('T')[0],
+          productConsumeTime: new Date().toLocaleTimeString().slice(0,5),
           productEan: '4 003994 133675',
         },
         {
           productName: 'Essen 3',
           productDescription: 'Beschreibung 3',
           productCalories: 300,
-          productConsumeTime: new Date(),
+          productConsumeDate: new Date().toISOString().split('T')[0],
+          productConsumeTime: new Date().toLocaleTimeString().slice(0,5),
           productEan: '4 003994 199862',
         },
         {
           productName: 'Essen 4',
           productDescription: 'Beschreibung 4',
           productCalories: 200,
-          productConsumeTime: new Date(),
+          productConsumeDate: new Date().toISOString().split('T')[0],
+          productConsumeTime: new Date().toLocaleTimeString().slice(0,5),
           productEan: '4 003994 477166',
         },
       ],
@@ -127,7 +129,7 @@ export default defineComponent({
   methods: {
     calculateDailyTotalCalory() {
      
-      var total = 0;
+      let total = 0;
       this.allProducts.forEach(product => {
         total += product.productCalories
       })
