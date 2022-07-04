@@ -12,10 +12,13 @@
         </ion-toolbar>
       </ion-header>
 
-      <ion-card>
+      
+
+
+      <ion-card :key="calory" v-for="calory in allProducts">
         <ion-card-header>
-          <ion-card-subtitle>11:10 23.04</ion-card-subtitle>
-          <ion-card-title>Emmi Caffe Lattee</ion-card-title>
+          <ion-card-subtitle>{{ calory.productConsumeTime }}</ion-card-subtitle>
+          <ion-card-title>{{ calory.productName }}</ion-card-title>
         </ion-card-header>
         <ion-card-content>
           <ion-grid>
@@ -23,7 +26,30 @@
               <ion-col>
                 <ion-text>
                   <div>
-                    Kaffee zum Frühstuck von der Migros
+                    {{ calory.productDescription }}
+                  </div>
+                </ion-text>
+              </ion-col>
+              <ion-col>
+                <h1 class="ion-float-right">
+                  <b> {{ calory.productCalories }} kcal</b>
+                </h1>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+ <ion-card>
+        <ion-card-header>
+          <ion-card-title>Kalorien Total</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-text>
+                  <div>
+                    Kalorien Total am {{ this.allProducts[0].productConsumeTime}}
                   </div>
                 </ion-text>
               </ion-col>
@@ -41,10 +67,11 @@
 </template>
 
 <script lang="ts">
-import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonIcon, IonItem, IonLabel, IonCol, IonGrid, IonRow, IonCard } from '@ionic/vue';
+import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonIcon, IonItem, IonLabel, IonCol, IonGrid, IonRow, IonCard, IonText, IonTextarea } from '@ionic/vue';
+import { defineComponent } from 'vue';
 
-export default {
-  name: 'Timerecord',
+export default defineComponent({
+  name: 'Calorytracker',
   components: {
     IonHeader,
     IonToolbar,
@@ -58,7 +85,10 @@ export default {
     IonCardTitle,
     IonCol,
     IonGrid,
-    IonRow
+    IonRow,
+    IonText,
+    IonTextarea,
+    IonLabel
   },
   data() {
     return {
@@ -94,5 +124,5 @@ export default {
       ],
     }
   },
-}
+});
 </script>
