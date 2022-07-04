@@ -35,7 +35,7 @@
                 <ion-label position="stacked">
                   Konsumdatum
                 </ion-label>
-                <ion-input type="date" v-model="newProduct.productConsumeDate" required></ion-input>
+                <ion-input type="date" v-model="newCaloryTrackDay.caloryTrackDayDate" required></ion-input>
               </ion-item>
               <ion-item>
                 <ion-label position="stacked">
@@ -44,7 +44,7 @@
                 <ion-input type="time" v-model="newProduct.productConsumeTime" required></ion-input>
               </ion-item>
               <div padding>
-                <ion-button size="large" @click="login" expand="block">Hinzufügen</ion-button>
+                <ion-button size="large" @click="addNewProduct" expand="block">Hinzufügen</ion-button>
               </div>
             </div>
           </ion-col>
@@ -68,7 +68,6 @@ import {
   IonButton,
   IonInput,
 } from "@ionic/vue";
-import { useProducts } from "@/composables/useProducts";
 
 export default {
   name: "Todo",
@@ -85,10 +84,24 @@ export default {
     IonButton,
     IonInput,
   },
-  setup() {
-    const { newProduct, products, getProducts, addProduct } = useProducts();
-
-    return { newProduct, products, getProducts, addProduct };
+  data() {
+    return {
+      newProduct: {
+        productName: '',
+        productDescription: '',
+        productCalories: null,
+        productConsumeTime: new Date(),
+        productEan: null,
+      },
+      newCaloryTrackDay: {
+        caloryTrackDayDate: new Date(),
+      }
+    }
   },
+  methods: {
+    async addNewProduct() {
+      console.log("NEUES PRODUKT HINZUGEFÜGT");
+    }
+  }
 };
 </script>
