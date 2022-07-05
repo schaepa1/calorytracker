@@ -29,7 +29,7 @@
                     </ion-card-header>
                   </ion-col>
                   <ion-col class="ion-no-padding">
-                    <ion-button color="danger" class="ion-float-right">
+                    <ion-button color="danger" class="ion-padding ion-float-right">
                       <ion-icon :icon="trash" />
                     </ion-button>
                   </ion-col>
@@ -52,22 +52,19 @@
                 </ion-row>
               </ion-grid>
             </ion-card>
-            <ion-card style="border: 5px outset #13ff00">
+            <ion-card style="background-color: #5c5c5e; color: white">
               <ion-card-header>
                 <ion-card-title><b>Kalorien Total</b></ion-card-title>
               </ion-card-header>
               <ion-card-content>
                 <ion-grid>
                   <ion-row>
-                    <ion-col>
-                      <ion-text>
-                        <div>
-                          Kalorien Total am {{ products[0]?.productConsumeDate }}
-                        </div>
+                    <ion-col class="ion-no-padding">
+                      <ion-text>Kalorien Total am {{ products[0]?.productConsumeDate }}
                       </ion-text>
                     </ion-col>
                     <ion-col>
-                      <h1 class="ion-float-right" style="font-size: 40px">
+                      <h1 class="ion-float-right" style="font-size: 30px;">
                         <b> {{ calculateDailyTotalCalories() }} kcal</b>
                       </h1>
                     </ion-col>
