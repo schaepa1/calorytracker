@@ -33,14 +33,9 @@ public class UserEndpoint {
         user.setUserWeightKeepCalories(caloriesDemand.getUserWeightKeepCalories());
         userRepository.save(user);
     }
-    //@RequestMapping(path = "/api/users", method = RequestMethod.GET)
-    //@PreAuthorize("isAuthenticated() AND hasRole('USER')")
-    //public void GetUserCalories(Principal principal) {
-    //    User user = userRepository.findById(principal.getName()).get();
-    //    user.setUserWeightGainCalories(caloriesDemand.getUserWeightGainCalories());
-    //    user.setUserWeightLoseCalories(caloriesDemand.getUserWeightLoseCalories());
-    //    user.setUserWeightKeepCalories(caloriesDemand.getUserWeightKeepCalories());
-    //    userRepository.save(user);
-    //}
-
+    @RequestMapping(path = "/api/users", method = RequestMethod.GET)
+    @PreAuthorize("isAuthenticated() AND hasRole('USER')")
+    public User GetUserCalories(Principal principal) {
+        return userRepository.findById(principal.getName()).get();
+    }
 }
