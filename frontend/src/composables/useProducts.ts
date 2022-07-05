@@ -63,15 +63,6 @@ export function useProducts() {
         } catch (error) {
             console.log(error); // FIXME: Errorhandling
         }
-        /*
-        console.log("NEUES PRODUKT HINZUGEFÜGT");
-        newProduct.value = {
-            productName: '',
-            productDescription: '',
-            productCalories: 0,
-            productConsumeDate: new Date().toISOString().split('T')[0],
-            productConsumeTime: new Date().toLocaleTimeString().slice(0, 5),
-        };*/
     }
 
     const checkAnyProductsToday = function () {
@@ -109,7 +100,7 @@ export function useProducts() {
     const calculateDailyTotalCalories = function () {
         let total = 0;
         products.value.forEach((product: any) => {
-            total += product.productCalories
+            total += parseInt(product.productCalories, 10);
         })
         return total;
     }
