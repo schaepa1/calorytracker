@@ -2,9 +2,9 @@
   <ion-page>
     <ion-content :fullscreen="true" padding>
       <ion-grid>
-        <ion-row justify-content-center>
+        <ion-row :style="{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}">
           <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
-            <div text-center>
+            <div :style="{textAlign: 'center'}">
               <h1>Calory Tracker</h1>
             </div>
             <div padding>

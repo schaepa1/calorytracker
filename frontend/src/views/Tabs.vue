@@ -2,25 +2,27 @@
   <ion-page>
     <ion-tabs>
       <ion-router-outlet></ion-router-outlet>
+
       <ion-tab-bar slot="bottom">
+        <ion-tab-button tab="dailyConsumption" href="/tabs/dailyConsumption">
+          <ion-icon :icon="fastFood" />
+          <ion-label>Tageskonsum</ion-label>
+        </ion-tab-button>
         <ion-tab-button tab="newProduct" href="/tabs/newProduct">
           <ion-icon :icon="add" />
           <ion-label>Produkt erfassen</ion-label>
-
+        </ion-tab-button>
+        <ion-tab-button tab="demandCalculator" href="/tabs/demandCalculator">
+          <ion-icon :icon="calculator" />
+          <ion-label>Bedarfsrechner</ion-label>
+        </ion-tab-button>
+        <ion-tab-button tab="demandResults" href="/tabs/demandResults">
+          <ion-icon :icon="person" />
+          <ion-label>Mein Bedarf</ion-label>
         </ion-tab-button>
         <ion-tab-button tab="todo" href="/tabs/todo">
           <ion-icon :icon="flash" />
           <ion-label>Todo</ion-label>
-        </ion-tab-button>
-          
-        <ion-tab-button tab="projects" href="/tabs/projects">
-          <ion-icon :icon="apps" />
-          <ion-label>Projects</ion-label>
-        </ion-tab-button>
-        
-        <ion-tab-button tab="timerecord" href="/tabs/timerecord">
-          <ion-icon :icon="send" />
-          <ion-label>Timerecord</ion-label>
         </ion-tab-button>
       </ion-tab-bar>
     </ion-tabs>
@@ -29,7 +31,7 @@
 
 <script lang="ts">
 import { IonTabBar, IonTabButton, IonTabs, IonLabel, IonIcon, IonPage, IonRouterOutlet } from '@ionic/vue';
-import { add, flash, apps, send } from 'ionicons/icons';
+import { add, flash, apps, send, fastFood, calculator, person } from 'ionicons/icons';
 
 export default {
   name: 'Tabs',
@@ -37,9 +39,12 @@ export default {
   setup() {
     return {
       add,
-      flash, 
-      apps, 
+      flash,
+      apps,
       send,
+      fastFood,
+      calculator,
+      person
     }
   }
 }
