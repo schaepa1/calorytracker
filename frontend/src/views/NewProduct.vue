@@ -44,7 +44,7 @@
                 <ion-input type="time" v-model="newProduct.productConsumeTime" required></ion-input>
               </ion-item>
               <div padding>
-                <ion-button size="large" @click="addNewProduct" expand="block">Hinzufügen</ion-button>
+                <ion-button size="large" @click="addProduct" expand="block">Hinzufügen</ion-button>
               </div>
             </div>
           </ion-col>
@@ -91,8 +91,8 @@ export default defineComponent({
     IonTextarea,
   },
   setup() {
-    const { newProduct, addNewProduct } = useProducts();
-    return { newProduct, addNewProduct };
+    const { newProduct, addProduct } = useProducts();
+    return { newProduct, addProduct };
   }
 });
 </script>

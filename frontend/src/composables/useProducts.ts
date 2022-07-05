@@ -1,7 +1,7 @@
-import { getAllToDos, updateToDo, addNewToDo } from '@/api/todos';
 import { Product } from '@/model/product';
 import { onMounted, ref } from 'vue';
 import { IonButton, IonContent, alertController } from '@ionic/vue';
+import { addNewProduct, getAllProducts } from '@/api/products';
 
 export function useProducts() {
 
@@ -9,7 +9,12 @@ export function useProducts() {
 
     const newProduct = ref<Product>({});
 
-    const getProducts = function () {
+    const getProducts = async () => {
+        /*try {
+            products.value = await getAllProducts();
+        } catch (error) {
+            console.log(error); // FIXME: Errorhandling
+        }*/
         products.value = [
             {
                 id: 1,
@@ -46,10 +51,18 @@ export function useProducts() {
                 productConsumeDate: new Date().toISOString().split('T')[0],
                 productConsumeTime: new Date().toLocaleTimeString().slice(0, 5),
                 productEan: '4 003994 477166',
-            },]
+            },];
     }
 
-    const addNewProduct = function () {
+    const addProduct = async () => {
+        try {
+            // add the new todo and update the list of all todos afterwards
+            await addNewProduct(newProduct.value);
+            getProducts();
+        } catch (error) {
+            console.log(error); // FIXME: Errorhandling
+        }
+        /*
         console.log("NEUES PRODUKT HINZUGEFÜGT");
         newProduct.value = {
             productName: '',
@@ -58,7 +71,15 @@ export function useProducts() {
             productConsumeDate: new Date().toISOString().split('T')[0],
             productConsumeTime: new Date().toLocaleTimeString().slice(0, 5),
             productEan: '',
-        };
+        };*/
+    }
+
+    const checkAnyProductsToday = function () {
+        if (products.value.length > 0) {
+            return true
+        } else {
+            return false
+        }
     }
 
     const showConfirmDeletionAlert = async function (product: Product) {
@@ -90,7 +111,6 @@ export function useProducts() {
         products.value.forEach((product: any) => {
             total += product.productCalories
         })
-        console.log("Total Daily Calory Intake Test: " + total);
         return total;
     }
 
@@ -100,9 +120,10 @@ export function useProducts() {
         products,
         newProduct,
         getProducts,
-        addNewProduct,
+        addProduct,
         calculateDailyTotalCalories,
         deleteProduct,
         showConfirmDeletionAlert,
+        checkAnyProductsToday,
     }
 }

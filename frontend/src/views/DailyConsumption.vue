@@ -2,18 +2,31 @@
   <ion-page>
     <ion-header>
       <ion-toolbar>
-        <ion-title>Tageskonsum vom {{ products[0]?.productConsumeDate }}</ion-title>
+        <ion-title
+          >Tageskonsum vom {{ products[0]?.productConsumeDate }}</ion-title
+        >
       </ion-toolbar>
     </ion-header>
     <ion-content :fullscreen="true">
       <ion-grid>
-        <ion-row :style="{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }">
+        <ion-row
+          :style="{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }"
+        >
           <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
             <ion-header collapse="condense">
-              <ion-toolbar :style="{paddingBottom: '20px'}">
-                <ion-title size="large" class="ion-padding-top">Tageskonsum</ion-title>
+              <ion-toolbar :style="{ paddingBottom: '20px' }">
+                <ion-title size="large" class="ion-padding-top">
+                  Tageskonsum
+                </ion-title>
               </ion-toolbar>
-              <ion-text :style="{paddingLeft: '20px'}" class="ion-padding">{{ products[0]?.productConsumeDate }}</ion-text>
+              <ion-text :style="{ paddingLeft: '20px' }" class="ion-padding">{{
+                products[0]?.productConsumeDate
+              }}</ion-text>
             </ion-header>
 
             <ion-card :key="product.id" v-for="product in products">
@@ -30,7 +43,11 @@
                     </ion-card-header>
                   </ion-col>
                   <ion-col class="ion-no-padding">
-                    <ion-button @click="showConfirmDeletionAlert(product)" color="danger" class="ion-padding ion-float-right">
+                    <ion-button
+                      @click="showConfirmDeletionAlert(product)"
+                      color="danger"
+                      class="ion-padding ion-float-right"
+                    >
                       <ion-icon :icon="trash" />
                     </ion-button>
                   </ion-col>
@@ -61,11 +78,17 @@
                 <ion-grid>
                   <ion-row>
                     <ion-col class="ion-no-padding">
-                      <ion-text>Kalorien Total am {{ products[0]?.productConsumeDate }}
+                      <ion-text
+                        >{{
+                          checkAnyProductsToday()
+                            ? "Kalorien Total am " +
+                              products[0]?.productConsumeDate
+                            : "Bisher keine Produkte erfasst"
+                        }}
                       </ion-text>
                     </ion-col>
                     <ion-col>
-                      <h1 class="ion-float-right" style="font-size: 30px;">
+                      <h1 class="ion-float-right" style="font-size: 30px">
                         <b> {{ calculateDailyTotalCalories() }} kcal</b>
                       </h1>
                     </ion-col>
@@ -124,14 +147,20 @@ export default defineComponent({
     IonIcon,
   },
   setup() {
-    const { products, getProducts, calculateDailyTotalCalories, showConfirmDeletionAlert } =
-      useProducts();
+    const {
+      products,
+      getProducts,
+      calculateDailyTotalCalories,
+      showConfirmDeletionAlert,
+      checkAnyProductsToday,
+    } = useProducts();
     return {
       products,
       getProducts,
       calculateDailyTotalCalories,
       trash,
       showConfirmDeletionAlert,
+      checkAnyProductsToday,
     };
   },
 });

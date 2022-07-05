@@ -53,10 +53,9 @@
               <ion-list>
                 <ion-item>
                   <ion-label position="stacked">
-                    Deine körperliche Aktivität
+                    Deine körperliche Aktivität <br /> (1 = kaum aktiv, 4 = sehr aktiv)
                   </ion-label>
-                  <ion-select v-model="calculationData.activity"
-                    placeholder="Wie aktiv bist du körperlich? (1 = kaum aktiv, 5 = sehr aktiv)">
+                  <ion-select v-model="calculationData.activity" placeholder="Wie aktiv bist du körperlich?">
                     <ion-select-option value=0.4>1</ion-select-option>
                     <ion-select-option value=0.7>2</ion-select-option>
                     <ion-select-option value=0.8>3</ion-select-option>
@@ -79,6 +78,8 @@
 
 <script>
 import { defineComponent } from 'vue';
+import axios from 'axios';
+import { API_ROOT } from "@/config/development";
 import {
   IonPage,
   IonHeader,
@@ -135,7 +136,8 @@ export default defineComponent({
   },
   methods: {
     calculateDemand() {
-      const grundumsatz = 66.5 + (13.75 * this.calculationData.weight) + (5 * this.calculationData.height) - (6.76 * this.calculationData.age);
+      let grundumsatz = 66.5 + (13.75 * this.calculationData.weight) + (5 * this.calculationData.height) - (6.76 * this.calculationData.age);
+      this.calculationData.sex == "f" ? grundumsatz *= 0.9 : grundumsatz *= 1;
       const leistungsumsatz = grundumsatz * this.calculationData.activity;
       const gesamtbedarf = grundumsatz + leistungsumsatz;
       const weightKeepCalories = gesamtbedarf;
@@ -151,9 +153,22 @@ export default defineComponent({
         activity: null,
       };
     },
+
     saveCaloryDemands(weightKeep, weightLose, weightGain) {
       console.log(weightKeep, weightLose, weightGain);
-    }
+      /*const config = {
+        headers: {
+          "Content-Type": "application/json",
+          "x-apikey": "5b2e750b0c346a20d90a5dda",
+        }
+      }
+      const demands = {
+        userWeightKeepCalories: weightKeep,
+        userWeightLoseCalories: weightLose,
+        userWeightGainCalories: weightGain,
+      }
+      axios.post(API_ROOT + '/api/demand', demands, config);*/
+    },
   }
 });
 </script>
