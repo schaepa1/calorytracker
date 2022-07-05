@@ -1,6 +1,7 @@
 import { getAllToDos, updateToDo, addNewToDo } from '@/api/todos';
 import { Product } from '@/model/product';
 import { onMounted, ref } from 'vue';
+import { IonButton, IonContent, alertController } from '@ionic/vue';
 
 export function useProducts() {
 
@@ -60,13 +61,36 @@ export function useProducts() {
         };
     }
 
+    const showConfirmDeletionAlert = async function (product: Product) {
+        const alert = await alertController.create({
+            header: 'Eintrag löschen',
+            message: 'Willst du ' + product.productName + ' vom ' + product.productConsumeDate + ' endgültig löschen?',
+            buttons: [
+                {
+                    text: 'Nein',
+                },
+                {
+                    text: 'Ja',
+                    handler: () => {
+                        deleteProduct(product.id)
+                    }
+                }
+            ]
+        });
+        await alert.present();
+    }
+
+    const deleteProduct = function (id: any) {
+        console.log("PRODUKT GELÖSCHT MIT ID", id);
+    }
+
 
     const calculateDailyTotalCalories = function () {
         let total = 0;
         products.value.forEach((product: any) => {
             total += product.productCalories
         })
-        //console.log("Total Daily Calory Intake Test: " + total);
+        console.log("Total Daily Calory Intake Test: " + total);
         return total;
     }
 
@@ -78,5 +102,7 @@ export function useProducts() {
         getProducts,
         addNewProduct,
         calculateDailyTotalCalories,
+        deleteProduct,
+        showConfirmDeletionAlert,
     }
 }

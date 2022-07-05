@@ -34,7 +34,7 @@
                 <ion-input disabled type="number" v-model="demands.weightGain" required></ion-input>
               </ion-item>
               <div padding>
-                <ion-button size="large" @click="calculateDemand" expand="block">Berechnen</ion-button>
+                <ion-button size="large" @click="calculateDemand" expand="block">Neu Berechnen</ion-button>
               </div>
             </div>
           </ion-col>

@@ -10,9 +10,10 @@
         <ion-row :style="{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }">
           <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
             <ion-header collapse="condense">
-              <ion-toolbar>
-                <ion-title size="large">Tageskonsum vom {{ products[0]?.productConsumeDate }}</ion-title>
+              <ion-toolbar :style="{paddingBottom: '20px'}">
+                <ion-title size="large" class="ion-padding-top">Tageskonsum</ion-title>
               </ion-toolbar>
+              <ion-text :style="{paddingLeft: '20px'}" class="ion-padding">{{ products[0]?.productConsumeDate }}</ion-text>
             </ion-header>
 
             <ion-card :key="product.id" v-for="product in products">
@@ -29,7 +30,7 @@
                     </ion-card-header>
                   </ion-col>
                   <ion-col class="ion-no-padding">
-                    <ion-button color="danger" class="ion-padding ion-float-right">
+                    <ion-button @click="showConfirmDeletionAlert(product)" color="danger" class="ion-padding ion-float-right">
                       <ion-icon :icon="trash" />
                     </ion-button>
                   </ion-col>
@@ -95,6 +96,8 @@ import {
   IonRow,
   IonCard,
   IonText,
+  IonButton,
+  IonIcon,
 } from "@ionic/vue";
 import { defineComponent } from "vue";
 import { useProducts } from "@/composables/useProducts";
@@ -117,15 +120,18 @@ export default defineComponent({
     IonGrid,
     IonRow,
     IonText,
+    IonButton,
+    IonIcon,
   },
   setup() {
-    const { products, getProducts, calculateDailyTotalCalories } =
+    const { products, getProducts, calculateDailyTotalCalories, showConfirmDeletionAlert } =
       useProducts();
     return {
       products,
       getProducts,
       calculateDailyTotalCalories,
       trash,
+      showConfirmDeletionAlert,
     };
   },
 });

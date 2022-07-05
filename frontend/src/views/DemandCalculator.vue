@@ -6,8 +6,8 @@
       </ion-toolbar>
     </ion-header>
     <ion-content :fullscreen="true">
-      <ion-grid :style="{paddingTop: '50px'}">
-        <ion-row :style="{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}">
+      <ion-grid :style="{ paddingTop: '50px' }">
+        <ion-row :style="{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }">
           <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
             <ion-header collapse="condense">
               <ion-toolbar>
@@ -35,9 +35,9 @@
               </ion-item>
               <ion-list>
                 <ion-radio-group v-model="calculationData.sex" value="sex">
-                  <ion-list-header>
+                  <ion-item>
                     <ion-label>Geschlecht</ion-label>
-                  </ion-list-header>
+                  </ion-item>
 
                   <ion-item>
                     <ion-label>Männlich</ion-label>
@@ -52,6 +52,9 @@
               </ion-list>
               <ion-list>
                 <ion-item>
+                  <ion-label position="stacked">
+                    Deine körperliche Aktivität
+                  </ion-label>
                   <ion-select v-model="calculationData.activity"
                     placeholder="Wie aktiv bist du körperlich? (1 = kaum aktiv, 5 = sehr aktiv)">
                     <ion-select-option value=0.4>1</ion-select-option>
@@ -76,7 +79,6 @@
 
 <script>
 import { defineComponent } from 'vue';
-import { useRouter } from 'vue-router';
 import {
   IonPage,
   IonHeader,
@@ -140,8 +142,6 @@ export default defineComponent({
       const weightLoseCalories = gesamtbedarf - 400;
       const weightGainCalories = gesamtbedarf + 500;
       this.saveCaloryDemands(weightKeepCalories, weightLoseCalories, weightGainCalories);
-      const router = useRouter();
-      router.push('/tabs/demandResults');
       console.log("BEDARF IST", gesamtbedarf);
       this.calculationData = {
         height: null,
