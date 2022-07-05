@@ -35,7 +35,7 @@
                 <ion-label position="stacked">
                   Konsumdatum
                 </ion-label>
-                <ion-input type="date" v-model="newProduct.productConsumeDate" required></ion-input>
+                <ion-input type="date" displayFormat="dd.mm.yyyy" v-model="newProduct.productConsumeDate" required></ion-input>
               </ion-item>
               <ion-item>
                 <ion-label position="stacked">

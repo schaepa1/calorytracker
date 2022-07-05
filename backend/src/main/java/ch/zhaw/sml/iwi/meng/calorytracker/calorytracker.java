@@ -83,7 +83,7 @@ public class calorytracker implements CommandLineRunner {
         product1.setProductName("Kaffi");
         product1.setProductCalories("800");
         product1.setProductDescription("Caffe Latte Emmi");
-        product1.setProductConsumeDate("5.7.2022");
+        product1.setProductConsumeDate("05.07.2022");
         product1.setProductConsumeTime("12:15");
         product1.setUser(user1);
         productRepository.save(product1);

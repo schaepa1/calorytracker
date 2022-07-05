@@ -13,7 +13,6 @@ public class Product {
     private String productName;
     private String productCalories;
     private String productDescription;
-    private long productEan;
     private String productConsumeDate;
     private String productConsumeTime;
     @ManyToOne
@@ -36,12 +35,6 @@ public class Product {
     }
     public void setProductDescription(String productDescription) {
         this.productDescription = productDescription;
-    }
-    public long getProductEan() {
-        return productEan;
-    }
-    public void setProductEan(long productEan) {
-        this.productEan = productEan;
     }
     public String getProductConsumeDate() {
         return productConsumeDate;

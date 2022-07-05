@@ -5,5 +5,4 @@ export interface Product {
   productCalories?: number;
   productConsumeDate?: string,
   productConsumeTime?: string,
-  productEan?: string,
 }

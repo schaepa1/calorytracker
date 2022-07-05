@@ -24,7 +24,6 @@ export function useProducts() {
                 productCalories: 500,
                 productConsumeDate: new Date().toISOString().split('T')[0],
                 productConsumeTime: new Date().toLocaleTimeString().slice(0, 5),
-                productEan: '4 003994 155486',
             },
             {
                 id: 2,
@@ -33,7 +32,6 @@ export function useProducts() {
                 productCalories: 150,
                 productConsumeDate: new Date().toISOString().split('T')[0],
                 productConsumeTime: new Date().toLocaleTimeString().slice(0, 5),
-                productEan: '4 003994 133675',
             },
             {
                 id: 3,
@@ -42,7 +40,6 @@ export function useProducts() {
                 productCalories: 300,
                 productConsumeDate: new Date().toISOString().split('T')[0],
                 productConsumeTime: new Date().toLocaleTimeString().slice(0, 5),
-                productEan: '4 003994 199862',
             },
             {
                 id: 4,
@@ -51,13 +48,16 @@ export function useProducts() {
                 productCalories: 200,
                 productConsumeDate: new Date().toISOString().split('T')[0],
                 productConsumeTime: new Date().toLocaleTimeString().slice(0, 5),
-                productEan: '4 003994 477166',
             },];*/
     }
 
     const addProduct = async () => {
         try {
             // add the new todo and update the list of all todos afterwards
+            let consumeDate = newProduct.value.productConsumeDate as string;
+            let consumeDateFormatted = consumeDate.split("-").reverse().join(".");
+            newProduct.value.productConsumeDate = consumeDateFormatted;
+            console.log(newProduct.value);
             await addNewProduct(newProduct.value);
             getProducts();
         } catch (error) {
@@ -71,7 +71,6 @@ export function useProducts() {
             productCalories: 0,
             productConsumeDate: new Date().toISOString().split('T')[0],
             productConsumeTime: new Date().toLocaleTimeString().slice(0, 5),
-            productEan: '',
         };*/
     }
 
