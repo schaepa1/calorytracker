@@ -16,6 +16,10 @@
           <ion-icon :icon="calculator" />
           <ion-label>Bedarfsrechner</ion-label>
         </ion-tab-button>
+        <ion-tab-button tab="demandResults" href="/tabs/demandResults">
+          <ion-icon :icon="person" />
+          <ion-label>Mein Bedarf</ion-label>
+        </ion-tab-button>
         <ion-tab-button tab="todo" href="/tabs/todo">
           <ion-icon :icon="flash" />
           <ion-label>Todo</ion-label>
@@ -27,7 +31,7 @@
 
 <script lang="ts">
 import { IonTabBar, IonTabButton, IonTabs, IonLabel, IonIcon, IonPage, IonRouterOutlet } from '@ionic/vue';
-import { add, flash, apps, send, fastFood, calculator } from 'ionicons/icons';
+import { add, flash, apps, send, fastFood, calculator, person } from 'ionicons/icons';
 
 export default {
   name: 'Tabs',
@@ -40,6 +44,7 @@ export default {
       send,
       fastFood,
       calculator,
+      person
     }
   }
 }

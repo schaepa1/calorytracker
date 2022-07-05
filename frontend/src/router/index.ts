@@ -33,6 +33,10 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('@/views/DemandCalculator.vue')
       },
       {
+        path: 'demandResults',
+        component: () => import('@/views/DemandResults.vue')
+      },
+      {
         path: 'todo',
         component: () => import('@/views/Todo.vue')
       },

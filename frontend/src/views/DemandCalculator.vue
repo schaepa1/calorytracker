@@ -6,9 +6,9 @@
       </ion-toolbar>
     </ion-header>
     <ion-content :fullscreen="true">
-      <ion-grid>
-        <ion-row justify-content-center>
-          <ion-col align-self-center>
+      <ion-grid :style="{paddingTop: '50px'}">
+        <ion-row :style="{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}">
+          <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
             <ion-header collapse="condense">
               <ion-toolbar>
                 <ion-title size="large">Bedarfsrechner</ion-title>
@@ -52,15 +52,19 @@
               </ion-list>
               <ion-list>
                 <ion-item>
-                  <ion-select placeholder="Wie aktiv bist du körperlich?">
-                    <ion-select-option value="1">Ich bewege mich kaum</ion-select-option>
-                    <ion-select-option value="2">Ich bewege mich ab und zu</ion-select-option>
-                    <ion-select-option value="3">Ich bewege mich </ion-select-option>
+                  <ion-select v-model="calculationData.activity"
+                    placeholder="Wie aktiv bist du körperlich? (1 = kaum aktiv, 5 = sehr aktiv)">
+                    <ion-select-option value=0.4>1</ion-select-option>
+                    <ion-select-option value=0.7>2</ion-select-option>
+                    <ion-select-option value=0.8>3</ion-select-option>
+                    <ion-select-option value=1.2>4</ion-select-option>
                   </ion-select>
                 </ion-item>
               </ion-list>
               <div padding>
-                <ion-button size="large" @click="addNewProduct" expand="block">Berechnen</ion-button>
+                <ion-button size="large" @click="calculateDemand" expand="block">
+                  Berechnen
+                </ion-button>
               </div>
             </div>
           </ion-col>
@@ -70,8 +74,9 @@
   </ion-page>
 </template>
 
-<script lang="ts">
+<script>
 import { defineComponent } from 'vue';
+import { useRouter } from 'vue-router';
 import {
   IonPage,
   IonHeader,
@@ -89,6 +94,8 @@ import {
   IonRadioGroup,
   IonList,
   IonListHeader,
+  IonSelect,
+  IonSelectOption,
 } from "@ionic/vue";
 
 export default defineComponent({
@@ -110,6 +117,8 @@ export default defineComponent({
     IonRadioGroup,
     IonList,
     IonListHeader,
+    IonSelect,
+    IonSelectOption,
   },
   data() {
     return {
@@ -123,8 +132,17 @@ export default defineComponent({
     };
   },
   methods: {
-    addNewProduct() {
-      console.log("BEDARF BERECHNET");
+    calculateDemand() {
+      const grundumsatz = 66.5 + (13.75 * this.calculationData.weight) + (5 * this.calculationData.height) - (6.76 * this.calculationData.age);
+      const leistungsumsatz = grundumsatz * this.calculationData.activity;
+      const gesamtbedarf = grundumsatz + leistungsumsatz;
+      const weightKeepCalories = gesamtbedarf;
+      const weightLoseCalories = gesamtbedarf - 400;
+      const weightGainCalories = gesamtbedarf + 500;
+      this.saveCaloryDemands(weightKeepCalories, weightLoseCalories, weightGainCalories);
+      const router = useRouter();
+      router.push('/tabs/demandResults');
+      console.log("BEDARF IST", gesamtbedarf);
       this.calculationData = {
         height: null,
         weight: null,
@@ -132,6 +150,9 @@ export default defineComponent({
         sex: '',
         activity: null,
       };
+    },
+    saveCaloryDemands(weightKeep, weightLose, weightGain) {
+      console.log(weightKeep, weightLose, weightGain);
     }
   }
 });

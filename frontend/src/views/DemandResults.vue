@@ -2,7 +2,7 @@
   <ion-page>
     <ion-header>
       <ion-toolbar>
-        <ion-title>Produkt erfassen</ion-title>
+        <ion-title>Mein Kalorienbedarf</ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content :fullscreen="true">
@@ -11,40 +11,30 @@
           <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
             <ion-header collapse="condense">
               <ion-toolbar>
-                <ion-title size="large">Produkt erfassen</ion-title>
+                <ion-title size="large">Bedarfsrechner</ion-title>
               </ion-toolbar>
             </ion-header>
             <div :style="{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }">
               <ion-item>
                 <ion-label position="stacked">
-                  Produktname
+                  Kalorienbedarf zum abnehmen
                 </ion-label>
-                <ion-input type="text" v-model="newProduct.productName" required></ion-input>
-              </ion-item>
-              <ion-item>
-                <ion-label position="stacked">Produktbeschreibung</ion-label>
-                <ion-textarea v-model="newProduct.productDescription"></ion-textarea>
+                <ion-input disabled type="number" v-model="demands.weightLose" required></ion-input>
               </ion-item>
               <ion-item>
                 <ion-label position="stacked">
-                  Kalorien
+                  Kalorienbedarf zum Gewicht halten
                 </ion-label>
-                <ion-input type="number" v-model="newProduct.productCalories" required></ion-input>
+                <ion-input disabled type="number" v-model="demands.weightKeep" required></ion-input>
               </ion-item>
               <ion-item>
                 <ion-label position="stacked">
-                  Konsumdatum
+                  Kalorienbedarf zum zunehmen
                 </ion-label>
-                <ion-input type="date" v-model="newProduct.productConsumeDate" required></ion-input>
-              </ion-item>
-              <ion-item>
-                <ion-label position="stacked">
-                  Konsumzeitpunkt
-                </ion-label>
-                <ion-input type="time" v-model="newProduct.productConsumeTime" required></ion-input>
+                <ion-input disabled type="number" v-model="demands.weightGain" required></ion-input>
               </ion-item>
               <div padding>
-                <ion-button size="large" @click="addNewProduct" expand="block">Hinzufügen</ion-button>
+                <ion-button size="large" @click="calculateDemand" expand="block">Berechnen</ion-button>
               </div>
             </div>
           </ion-col>
@@ -54,7 +44,7 @@
   </ion-page>
 </template>
 
-<script lang="ts">
+<script>
 import { defineComponent } from 'vue';
 import {
   IonPage,
@@ -69,12 +59,10 @@ import {
   IonButton,
   IonInput,
   IonLabel,
-  IonTextarea,
 } from "@ionic/vue";
-import { useProducts } from '@/composables/useProducts';
 
 export default defineComponent({
-  name: "NewProduct",
+  name: "DemandCalculator",
   components: {
     IonHeader,
     IonToolbar,
@@ -88,11 +76,27 @@ export default defineComponent({
     IonButton,
     IonInput,
     IonLabel,
-    IonTextarea,
   },
-  setup() {
-    const { newProduct, addNewProduct } = useProducts();
-    return { newProduct, addNewProduct };
-  }
+  data() {
+    return {
+      demands: {
+        weightKeep: 0,
+        weightLose: 0,
+        weightGain: 0,
+      },
+    };
+  },
+  methods: {
+    getDemands() {
+      this.demands = {
+        weightKeep: 3000,
+        weightLose: 2600,
+        weightGain: 3500,
+      }
+    }
+  },
+  mounted() {
+    this.getDemands();
+  },
 });
 </script>
