@@ -39,9 +39,9 @@
           </ion-grid>
         </ion-card-content>
       </ion-card>
- <ion-card>
+ <ion-card style="border: 5px outset #13FF00;">
         <ion-card-header>
-          <ion-card-title>Kalorien Total</ion-card-title>
+          <ion-card-title><b>Kalorien Total</b></ion-card-title>
         </ion-card-header>
         <ion-card-content>
           <ion-grid>
@@ -54,7 +54,7 @@
                 </ion-text>
               </ion-col>
               <ion-col>
-                <h1 class="ion-float-right">
+                <h1 class="ion-float-right" style="font-size:40px">
                   <b> {{calculateDailyTotalCalory()}} kcal</b>
                 </h1>
               </ion-col>
