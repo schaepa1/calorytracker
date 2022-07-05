@@ -20,7 +20,6 @@ export async function getAllProducts(): Promise<Product[]> {
     }
     let year = newDate.getFullYear();
     let todayDate = dayString + "." + monthString + "." + year;
-    console.log("TODAY DATE", todayDate);
     const response = await axios.get(API_ROOT + '/api/product/' + todayDate, config);
     console.log("RESPONSE IST: ", response.data);
     return response.data;

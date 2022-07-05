@@ -6,8 +6,8 @@
       </ion-toolbar>
     </ion-header>
     <ion-content :fullscreen="true">
-      <ion-grid :style="{paddingTop: '50px'}">
-        <ion-row :style="{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}">
+      <ion-grid :style="{ paddingTop: '50px' }">
+        <ion-row :style="{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }">
           <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
             <ion-header collapse="condense">
               <ion-toolbar>
@@ -88,25 +88,23 @@ export default defineComponent({
       },
     };
   },
-  methods: {    
+  methods: {
     getDemands() {
-      
+
       this.demands = {
         weightKeep: 3000,
         weightLose: 2600,
         weightGain: 3500,
       }
-      /*
       const config = {
-        headers: {
-          "Content-Type": "application/json",
-          "x-apikey": "5b2e750b0c346a20d90a5dda",
-        }
+        withCredentials: true
       }
-      axios.get(API_ROOT + '/api/demand', config)
+      axios.get(API_ROOT + '/api/users', config)
         .then(response => {
-          this.tasks = response.data;
-        })*/
+          this.demands.weightKeep = response.data.userWeightKeepCalories;
+          this.demands.weightLose = response.data.userWeightLoseCalories;
+          this.demands.weightGain = response.data.userWeightGainCalories;
+        })
     },
   },
 

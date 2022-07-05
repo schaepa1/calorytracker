@@ -135,7 +135,7 @@ export default defineComponent({
     };
   },
   methods: {
-    calculateDemand() {
+    calculateDemand () {
       let grundumsatz = 66.5 + (13.75 * this.calculationData.weight) + (5 * this.calculationData.height) - (6.76 * this.calculationData.age);
       this.calculationData.sex == "f" ? grundumsatz *= 0.9 : grundumsatz *= 1;
       const leistungsumsatz = grundumsatz * this.calculationData.activity;
@@ -156,18 +156,19 @@ export default defineComponent({
 
     saveCaloryDemands(weightKeep, weightLose, weightGain) {
       console.log(weightKeep, weightLose, weightGain);
-      /*const config = {
-        headers: {
-          "Content-Type": "application/json",
-          "x-apikey": "5b2e750b0c346a20d90a5dda",
+      const config = {
+        withCredentials: true
+      }
+      try {
+        const demands = {
+          userWeightKeepCalories: weightKeep,
+          userWeightLoseCalories: weightLose,
+          userWeightGainCalories: weightGain,
         }
+        axios.put(API_ROOT + '/api/users', demands, config);
+      } catch (error) {
+        return error;
       }
-      const demands = {
-        userWeightKeepCalories: weightKeep,
-        userWeightLoseCalories: weightLose,
-        userWeightGainCalories: weightGain,
-      }
-      axios.post(API_ROOT + '/api/demand', demands, config);*/
     },
   }
 });
