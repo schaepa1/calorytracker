@@ -11,42 +11,42 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name="USERTABLE")
+@Table(name = "USERTABLE")
 public class User {
 
     @Id
     private String loginName;
-    private int userWeightgaincalories;
-    private int userWeightlosecalories;
-    private int userWeightkeepcalories;
+    private int userWeightGainCalories;
+    private int userWeightLoseCalories;
+    private int userWeightKeepCalories;
     @JsonIgnore
     private String passwordHash;
 
     @ManyToMany
     private List<Role> roles = new ArrayList<>();
-    
-    public int getUserWeightgaincalories() {
-        return userWeightgaincalories;
+
+    public int getUserWeightGainCalories() {
+        return userWeightGainCalories;
     }
 
-    public void setUserWeightgaincalories(int userWeightgaincalories) {
-        this.userWeightgaincalories = userWeightgaincalories;
+    public void setUserWeightGainCalories(int userWeightgaincalories) {
+        this.userWeightGainCalories = userWeightgaincalories;
     }
 
-    public int getUserWeightlosecalories() {
-        return userWeightlosecalories;
+    public int getUserWeightLoseCalories() {
+        return userWeightLoseCalories;
     }
 
-    public void setUserWeightlosecalories(int userWeightlosecalories) {
-        this.userWeightlosecalories = userWeightlosecalories;
+    public void setUserWeightLoseCalories(int userWeightlosecalories) {
+        this.userWeightLoseCalories = userWeightlosecalories;
     }
 
-    public int getUserWeightkeepcalories() {
-        return userWeightkeepcalories;
+    public int getUserWeightKeepCalories() {
+        return userWeightKeepCalories;
     }
 
-    public void setUserWeightkeepcalories(int userWeightkeepcalories) {
-        this.userWeightkeepcalories = userWeightkeepcalories;
+    public void setUserWeightKeepCalories(int userWeightkeepcalories) {
+        this.userWeightKeepCalories = userWeightkeepcalories;
     }
 
     /**
@@ -90,6 +90,5 @@ public class User {
     public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
-
 
 }

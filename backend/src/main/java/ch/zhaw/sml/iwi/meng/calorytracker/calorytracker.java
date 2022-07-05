@@ -59,9 +59,9 @@ public class calorytracker implements CommandLineRunner {
         User user1 = new User();
         user1.setLoginName("user1");
         user1.setPasswordHash(new BCryptPasswordEncoder().encode("user1"));
-        user1.setUserWeightgaincalories(4000);
-        user1.setUserWeightkeepcalories(3000);
-        user1.setUserWeightlosecalories(2000);
+        user1.setUserWeightGainCalories(4000);
+        user1.setUserWeightKeepCalories(3000);
+        user1.setUserWeightLoseCalories(2000);
 
         Role r = new Role();
         r.setRoleName("ROLE_USER");
@@ -72,9 +72,9 @@ public class calorytracker implements CommandLineRunner {
         User user2 = new User();
         user2.setLoginName("user2");
         user2.setPasswordHash(new BCryptPasswordEncoder().encode("user2"));
-        user2.setUserWeightgaincalories(3000);
-        user2.setUserWeightkeepcalories(2000);
-        user2.setUserWeightlosecalories(1000);
+        user2.setUserWeightGainCalories(3000);
+        user2.setUserWeightKeepCalories(2000);
+        user2.setUserWeightLoseCalories(1000);
 
         user2.getRoles().add(r);
         userRepository.save(user2);
