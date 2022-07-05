@@ -66,7 +66,7 @@ export function useProducts() {
         products.value.forEach((product: any) => {
             total += product.productCalories
         })
-        console.log("Total Daily Calory Intake Test: " + total);
+        //console.log("Total Daily Calory Intake Test: " + total);
         return total;
     }
 
