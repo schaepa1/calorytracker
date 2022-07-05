@@ -10,25 +10,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import ch.zhaw.sml.iwi.meng.calorytracker.controller.ToDoController;
+import ch.zhaw.sml.iwi.meng.calorytracker.controller.ProductController;
 import ch.zhaw.sml.iwi.meng.calorytracker.entity.ToDo;
 
 @RestController
 public class ToDoEndpoint {
 
     @Autowired
-    private ToDoController toDoController;
+    private ProductController toDoController;
 
     @RequestMapping(path = "/api/todo", method = RequestMethod.GET)
     @PreAuthorize("isAuthenticated() AND hasRole('USER')")
     public List<ToDo> toDo(Principal principal) {
-        return  toDoController.listAllToDos(principal.getName());        
+        return  toDoController.listAllProducts(principal.getName());        
     }
 
     @RequestMapping(path = "/api/todo", method = RequestMethod.POST)
     @PreAuthorize("isAuthenticated() AND hasRole('USER')")
     public void addToDo(@RequestBody ToDo newToDo, Principal principal) {
-        toDoController.persistToDo(newToDo, principal.getName());
+        toDoController.persistProduct(newToDo, principal.getName());
     }
     
     @RequestMapping(path = "/api/todo", method = RequestMethod.PUT)

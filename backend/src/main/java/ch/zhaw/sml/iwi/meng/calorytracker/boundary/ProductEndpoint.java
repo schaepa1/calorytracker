@@ -22,7 +22,7 @@ public class ProductEndpoint {
     @PreAuthorize("isAuthenticated() AND hasRole('USER')")
     public List<Product> getProducts(@PathVariable("user") String UserLoginName, @PathVariable("date") String ProductDate) 
     {
-        return productRepository.findProductByUserandDate(UserLoginName, ProductDate);
+        return productRepository.findAllByUserAndDate(UserLoginName, ProductDate);
     }
 
     @RequestMapping(path = "/api/product/delete/{id}", method = RequestMethod.DELETE)
