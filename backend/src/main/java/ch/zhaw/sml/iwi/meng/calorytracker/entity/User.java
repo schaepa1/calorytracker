@@ -19,7 +19,12 @@ public class User {
     private int userWeightgaincalories;
     private int userWeightlosecalories;
     private int userWeightkeepcalories;
+    @JsonIgnore
+    private String passwordHash;
 
+    @ManyToMany
+    private List<Role> roles = new ArrayList<>();
+    
     public int getUserWeightgaincalories() {
         return userWeightgaincalories;
     }
@@ -43,12 +48,6 @@ public class User {
     public void setUserWeightkeepcalories(int userWeightkeepcalories) {
         this.userWeightkeepcalories = userWeightkeepcalories;
     }
-
-    @JsonIgnore
-    private String passwordHash;
-
-    @ManyToMany
-    private List<Role> roles = new ArrayList<>();
 
     /**
      * @return the loginName
