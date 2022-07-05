@@ -14,8 +14,8 @@ public class Product {
     private String productCalories;
     private String productDescription;
     private long productEan;
-    private String productDate;
-    private String productConsumetime;
+    private String productConsumeDate;
+    private String productConsumeTime;
     @ManyToOne
     private User user;
     
@@ -44,16 +44,16 @@ public class Product {
         this.productEan = productEan;
     }
     public String getProductDate() {
-        return productDate;
+        return productConsumeDate;
     }
-    public void setProductDate(String productDate) {
-        this.productDate = productDate;
+    public void setProductDate(String productConsumeDate) {
+        this.productConsumeDate = productConsumeDate;
     }
     public String getProductConsumetime() {
-        return productConsumetime;
+        return productConsumeTime;
     }
-    public void setProductConsumetime(String productConsumetime) {
-        this.productConsumetime = productConsumetime;
+    public void setProductConsumetime(String productConsumeTime) {
+        this.productConsumeTime = productConsumeTime;
     }
     public User getUser() {
         return user;
