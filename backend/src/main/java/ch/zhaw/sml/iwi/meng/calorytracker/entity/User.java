@@ -11,44 +11,43 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name="USERTABLE")
+@Table(name = "USERTABLE")
 public class User {
 
     @Id
     private String loginName;
-    private int userWeightgaincalories;
-    private int userWeightlosecalories;
-    private int userWeightkeepcalories;
-
-    public int getUserWeightgaincalories() {
-        return userWeightgaincalories;
-    }
-
-    public void setUserWeightgaincalories(int userWeightgaincalories) {
-        this.userWeightgaincalories = userWeightgaincalories;
-    }
-
-    public int getUserWeightlosecalories() {
-        return userWeightlosecalories;
-    }
-
-    public void setUserWeightlosecalories(int userWeightlosecalories) {
-        this.userWeightlosecalories = userWeightlosecalories;
-    }
-
-    public int getUserWeightkeepcalories() {
-        return userWeightkeepcalories;
-    }
-
-    public void setUserWeightkeepcalories(int userWeightkeepcalories) {
-        this.userWeightkeepcalories = userWeightkeepcalories;
-    }
-
+    private int userWeightGainCalories;
+    private int userWeightLoseCalories;
+    private int userWeightKeepCalories;
     @JsonIgnore
     private String passwordHash;
 
     @ManyToMany
     private List<Role> roles = new ArrayList<>();
+
+    public int getUserWeightGainCalories() {
+        return userWeightGainCalories;
+    }
+
+    public void setUserWeightGainCalories(int userWeightgaincalories) {
+        this.userWeightGainCalories = userWeightgaincalories;
+    }
+
+    public int getUserWeightLoseCalories() {
+        return userWeightLoseCalories;
+    }
+
+    public void setUserWeightLoseCalories(int userWeightlosecalories) {
+        this.userWeightLoseCalories = userWeightlosecalories;
+    }
+
+    public int getUserWeightKeepCalories() {
+        return userWeightKeepCalories;
+    }
+
+    public void setUserWeightKeepCalories(int userWeightkeepcalories) {
+        this.userWeightKeepCalories = userWeightkeepcalories;
+    }
 
     /**
      * @return the loginName
@@ -91,6 +90,5 @@ public class User {
     public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
-
 
 }
