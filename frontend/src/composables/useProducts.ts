@@ -1,7 +1,7 @@
-import { getAllToDos, updateToDo, addNewToDo } from '@/api/todos';
 import { Product } from '@/model/product';
 import { onMounted, ref } from 'vue';
 import { IonButton, IonContent, alertController } from '@ionic/vue';
+import { addNewProduct, getAllProducts } from '@/api/products';
 
 export function useProducts() {
 
@@ -9,49 +9,60 @@ export function useProducts() {
 
     const newProduct = ref<Product>({});
 
-    const getProducts = function () {
-        products.value =
-            [
-                {
-                    id: 1,
-                    productName: 'Essen 1',
-                    productDescription: 'Beschreibung 1',
-                    productCalories: 500,
-                    productConsumeDate: new Date().toISOString().split('T')[0],
-                    productConsumeTime: new Date().toLocaleTimeString().slice(0, 5),
-                    productEan: '4 003994 155486',
-                },
-                {
-                    id: 2,
-                    productName: 'Essen 2',
-                    productDescription: 'Beschreibung 2',
-                    productCalories: 150,
-                    productConsumeDate: new Date().toISOString().split('T')[0],
-                    productConsumeTime: new Date().toLocaleTimeString().slice(0, 5),
-                    productEan: '4 003994 133675',
-                },
-                {
-                    id: 3,
-                    productName: 'Essen 3',
-                    productDescription: 'Beschreibung 3',
-                    productCalories: 300,
-                    productConsumeDate: new Date().toISOString().split('T')[0],
-                    productConsumeTime: new Date().toLocaleTimeString().slice(0, 5),
-                    productEan: '4 003994 199862',
-                },
-                {
-                    id: 4,
-                    productName: 'Essen 4',
-                    productDescription: 'Beschreibung 4',
-                    productCalories: 200,
-                    productConsumeDate: new Date().toISOString().split('T')[0],
-                    productConsumeTime: new Date().toLocaleTimeString().slice(0, 5),
-                    productEan: '4 003994 477166',
-                },
-            ]
+    const getProducts = async () => {
+        /*try {
+            products.value = await getAllProducts();
+        } catch (error) {
+            console.log(error); // FIXME: Errorhandling
+        }*/
+        products.value = [
+            {
+                id: 1,
+                productName: 'Essen 1',
+                productDescription: 'Beschreibung 1',
+                productCalories: 500,
+                productConsumeDate: new Date().toISOString().split('T')[0],
+                productConsumeTime: new Date().toLocaleTimeString().slice(0, 5),
+                productEan: '4 003994 155486',
+            },
+            {
+                id: 2,
+                productName: 'Essen 2',
+                productDescription: 'Beschreibung 2',
+                productCalories: 150,
+                productConsumeDate: new Date().toISOString().split('T')[0],
+                productConsumeTime: new Date().toLocaleTimeString().slice(0, 5),
+                productEan: '4 003994 133675',
+            },
+            {
+                id: 3,
+                productName: 'Essen 3',
+                productDescription: 'Beschreibung 3',
+                productCalories: 300,
+                productConsumeDate: new Date().toISOString().split('T')[0],
+                productConsumeTime: new Date().toLocaleTimeString().slice(0, 5),
+                productEan: '4 003994 199862',
+            },
+            {
+                id: 4,
+                productName: 'Essen 4',
+                productDescription: 'Beschreibung 4',
+                productCalories: 200,
+                productConsumeDate: new Date().toISOString().split('T')[0],
+                productConsumeTime: new Date().toLocaleTimeString().slice(0, 5),
+                productEan: '4 003994 477166',
+            },];
     }
 
-    const addNewProduct = function () {
+    const addProduct = async () => {
+        try {
+            // add the new todo and update the list of all todos afterwards
+            await addNewProduct(newProduct.value);
+            getProducts();
+        } catch (error) {
+            console.log(error); // FIXME: Errorhandling
+        }
+        /*
         console.log("NEUES PRODUKT HINZUGEFÜGT");
         newProduct.value = {
             productName: '',
@@ -60,7 +71,7 @@ export function useProducts() {
             productConsumeDate: new Date().toISOString().split('T')[0],
             productConsumeTime: new Date().toLocaleTimeString().slice(0, 5),
             productEan: '',
-        };
+        };*/
     }
 
     const checkAnyProductsToday = function () {
@@ -100,7 +111,6 @@ export function useProducts() {
         products.value.forEach((product: any) => {
             total += product.productCalories
         })
-        console.log("Total Daily Calory Intake Test: " + total);
         return total;
     }
 
@@ -110,11 +120,10 @@ export function useProducts() {
         products,
         newProduct,
         getProducts,
-        addNewProduct,
+        addProduct,
         calculateDailyTotalCalories,
         deleteProduct,
         showConfirmDeletionAlert,
-        checkAnyProductsToday
-
+        checkAnyProductsToday,
     }
 }

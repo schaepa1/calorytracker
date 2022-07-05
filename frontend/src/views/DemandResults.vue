@@ -11,7 +11,7 @@
           <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
             <ion-header collapse="condense">
               <ion-toolbar>
-                <ion-title size="large">Bedarfsrechner</ion-title>
+                <ion-title size="large">Mein Kalorienbedarf</ion-title>
               </ion-toolbar>
             </ion-header>
             <div :style="{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }">
@@ -34,7 +34,7 @@
                 <ion-input disabled type="number" v-model="demands.weightGain" required></ion-input>
               </ion-item>
               <div padding>
-                <ion-button size="large" @click="calculateDemand" expand="block">Neu Berechnen</ion-button>
+                <ion-button router-link="/tabs/demandCalculator" size="large" expand="block">Neu Berechnen</ion-button>
               </div>
             </div>
           </ion-col>
@@ -46,6 +46,8 @@
 
 <script>
 import { defineComponent } from 'vue';
+import axios from 'axios';
+import { API_ROOT } from "@/config/development";
 import {
   IonPage,
   IonHeader,
@@ -86,15 +88,28 @@ export default defineComponent({
       },
     };
   },
-  methods: {
+  methods: {    
     getDemands() {
+      
       this.demands = {
         weightKeep: 3000,
         weightLose: 2600,
         weightGain: 3500,
       }
-    }
+      /*
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          "x-apikey": "5b2e750b0c346a20d90a5dda",
+        }
+      }
+      axios.get(API_ROOT + '/api/demand', config)
+        .then(response => {
+          this.tasks = response.data;
+        })*/
+    },
   },
+
   mounted() {
     this.getDemands();
   },
