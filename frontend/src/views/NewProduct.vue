@@ -71,6 +71,7 @@ import {
   IonLabel,
   IonTextarea,
 } from "@ionic/vue";
+import { useProducts } from '@/composables/useProducts';
 
 export default defineComponent({
   name: "NewProduct",
@@ -89,30 +90,9 @@ export default defineComponent({
     IonLabel,
     IonTextarea,
   },
-  data() {
-    return {
-      newProduct: {
-        productName: '',
-        productDescription: '',
-        productCalories: null,
-        productConsumeDate: new Date().toISOString().split('T')[0],
-        productConsumeTime: new Date().toLocaleTimeString().slice(0,5),
-        productEan: '',
-      },
-    };
-  },
-  methods: {
-    addNewProduct() {
-      console.log("NEUES PRODUKT HINZUGEFÜGT");
-      this.newProduct = {
-        productName: '',
-        productDescription: '',
-        productCalories: null,
-        productConsumeDate: new Date().toISOString().split('T')[0],
-        productConsumeTime: new Date().toLocaleTimeString().slice(0,5),
-        productEan: '',
-      };
-    }
+  setup() {
+    const { newProduct, addNewProduct } = useProducts();
+    return { newProduct, addNewProduct };
   }
 });
 </script>

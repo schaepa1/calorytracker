@@ -33,6 +33,32 @@
                 </ion-label>
                 <ion-input type="number" v-model="calculationData.age" required></ion-input>
               </ion-item>
+              <ion-list>
+                <ion-radio-group v-model="calculationData.sex" value="sex">
+                  <ion-list-header>
+                    <ion-label>Geschlecht</ion-label>
+                  </ion-list-header>
+
+                  <ion-item>
+                    <ion-label>Männlich</ion-label>
+                    <ion-radio slot="start" value="m"></ion-radio>
+                  </ion-item>
+
+                  <ion-item>
+                    <ion-label>Weiblich</ion-label>
+                    <ion-radio slot="start" value="f"></ion-radio>
+                  </ion-item>
+                </ion-radio-group>
+              </ion-list>
+              <ion-list>
+                <ion-item>
+                  <ion-select placeholder="Wie aktiv bist du körperlich?">
+                    <ion-select-option value="1">Ich bewege mich kaum</ion-select-option>
+                    <ion-select-option value="2">Ich bewege mich ab und zu</ion-select-option>
+                    <ion-select-option value="3">Ich bewege mich </ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-list>
               <div padding>
                 <ion-button size="large" @click="addNewProduct" expand="block">Berechnen</ion-button>
               </div>
@@ -59,6 +85,10 @@ import {
   IonButton,
   IonInput,
   IonLabel,
+  IonRadio,
+  IonRadioGroup,
+  IonList,
+  IonListHeader,
 } from "@ionic/vue";
 
 export default defineComponent({
@@ -76,6 +106,10 @@ export default defineComponent({
     IonButton,
     IonInput,
     IonLabel,
+    IonRadio,
+    IonRadioGroup,
+    IonList,
+    IonListHeader,
   },
   data() {
     return {
