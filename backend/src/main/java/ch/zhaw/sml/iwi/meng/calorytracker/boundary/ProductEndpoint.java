@@ -1,5 +1,6 @@
 package ch.zhaw.sml.iwi.meng.calorytracker.boundary;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,29 +13,35 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ch.zhaw.sml.iwi.meng.calorytracker.entity.Product;
 import ch.zhaw.sml.iwi.meng.calorytracker.entity.ProductRepository;
+import ch.zhaw.sml.iwi.meng.calorytracker.entity.UserRepository;
 
 @RestController
 public class ProductEndpoint {
     @Autowired
     private ProductRepository productRepository;
+    @Autowired
+    private UserRepository userRepository;
 
-    @RequestMapping(path = "/api/product/get/{user}/{date}", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(path = "/api/product/{date}", method = RequestMethod.GET, produces = "application/json")
     @PreAuthorize("isAuthenticated() AND hasRole('USER')")
-    public List<Product> getProducts(@PathVariable("user") String UserLoginName, @PathVariable("date") String ProductDate) 
+    public List<Product> getProductsbyDate(@PathVariable("date") String ProductDate, Principal principal) 
     {
-        return productRepository.findProductByUserandDate(UserLoginName, ProductDate);
+        return productRepository.findProductByUserandDate(principal.getName(), ProductDate);
     }
 
-    @RequestMapping(path = "/api/product/delete/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(path = "/api/product/{id}", method = RequestMethod.DELETE)
     @PreAuthorize("isAuthenticated() AND hasRole('USER')")
     public void deleteProduct(@PathVariable("id") int ProductId) 
     {
         productRepository.deleteById(ProductId);
     }
 
-    @RequestMapping(method = RequestMethod.POST, path = "/api/product/create")
-    public void createProduct(@RequestBody Product product) {
+    @RequestMapping(method = RequestMethod.POST, path = "/api/product")
+    @PreAuthorize("isAuthenticated() AND hasRole('USER')")
+    public void createProduct(Principal principal, @RequestBody Product product) {
+        product.setUser(userRepository.getById(principal.getName()));
         productRepository.save(product);
+        
     }
 
 }
