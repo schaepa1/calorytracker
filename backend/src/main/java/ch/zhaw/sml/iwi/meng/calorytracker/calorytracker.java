@@ -11,12 +11,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import ch.zhaw.sml.iwi.meng.calorytracker.entity.Product;
+import ch.zhaw.sml.iwi.meng.calorytracker.entity.ProductRepository;
 import ch.zhaw.sml.iwi.meng.calorytracker.entity.Role;
 import ch.zhaw.sml.iwi.meng.calorytracker.entity.RoleRepository;
-import ch.zhaw.sml.iwi.meng.calorytracker.entity.ToDo;
-import ch.zhaw.sml.iwi.meng.calorytracker.entity.ToDoRepository;
 import ch.zhaw.sml.iwi.meng.calorytracker.entity.User;
 import ch.zhaw.sml.iwi.meng.calorytracker.entity.UserRepository;
+
 
 @SpringBootApplication
 @EnableWebSecurity
@@ -30,13 +31,12 @@ public class calorytracker implements CommandLineRunner {
 
     @Autowired
     private UserRepository userRepository;
+    
+    @Autowired
+    private ProductRepository productRepository;
 
     @Autowired
     private RoleRepository roleRepository;
-
-    
-    @Autowired
-    private ToDoRepository toDoRepository;
 
     @Bean
     public WebMvcConfigurer corsConfigurer() {
@@ -56,23 +56,35 @@ public class calorytracker implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        User u = new User();
-        u.setLoginName("user");
-        u.setPasswordHash(new BCryptPasswordEncoder().encode("user"));
+        User user1 = new User();
+        user1.setLoginName("user1");
+        user1.setPasswordHash(new BCryptPasswordEncoder().encode("user1"));
+        user1.setUserWeightgaincalories(4000);
+        user1.setUserWeightkeepcalories(3000);
+        user1.setUserWeightlosecalories(2000);
+
         Role r = new Role();
         r.setRoleName("ROLE_USER");
         roleRepository.save(r);
-        u.getRoles().add(r);
-        userRepository.save(u);
+        user1.getRoles().add(r);
+        userRepository.save(user1);
 
-        ToDo toDo = new ToDo();
-        toDo.setTitle("Finish This app");
-        toDo.setOwner("user");
-        toDoRepository.save(toDo);
+        User user2 = new User();
+        user2.setLoginName("user2");
+        user2.setPasswordHash(new BCryptPasswordEncoder().encode("user2"));
+        user2.setUserWeightgaincalories(3000);
+        user2.setUserWeightkeepcalories(2000);
+        user2.setUserWeightlosecalories(1000);
 
-        toDo = new ToDo();
-        toDo.setTitle("Reply to student");
-        toDo.setOwner("user");
-        toDoRepository.save(toDo);
+        user2.getRoles().add(r);
+        userRepository.save(user2);
+
+        Product product1 = new Product();
+        product1.setProductName("Kaffi");
+        product1.setProductCalories("800");
+        product1.setProductDescription("Caffe Latte Emmi");
+        product1.setProductDate("05.07.2022");
+        product1.setUser(user1);
+        productRepository.save(product1);
     }
 }

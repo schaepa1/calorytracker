@@ -16,6 +16,33 @@ public class User {
 
     @Id
     private String loginName;
+    private int userWeightgaincalories;
+    private int userWeightlosecalories;
+    private int userWeightkeepcalories;
+
+    public int getUserWeightgaincalories() {
+        return userWeightgaincalories;
+    }
+
+    public void setUserWeightgaincalories(int userWeightgaincalories) {
+        this.userWeightgaincalories = userWeightgaincalories;
+    }
+
+    public int getUserWeightlosecalories() {
+        return userWeightlosecalories;
+    }
+
+    public void setUserWeightlosecalories(int userWeightlosecalories) {
+        this.userWeightlosecalories = userWeightlosecalories;
+    }
+
+    public int getUserWeightkeepcalories() {
+        return userWeightkeepcalories;
+    }
+
+    public void setUserWeightkeepcalories(int userWeightkeepcalories) {
+        this.userWeightkeepcalories = userWeightkeepcalories;
+    }
 
     @JsonIgnore
     private String passwordHash;
