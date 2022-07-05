@@ -11,6 +11,8 @@
           <ion-title size="large">Todos</ion-title>
         </ion-toolbar>
       </ion-header>
+
+      <barcode-scanner></barcode-scanner>
       <ion-list>
         <ion-item :key="todo" v-for="todo in todos">
           <ion-grid>
@@ -50,7 +52,7 @@
   </ion-page>
 </template>
 
-<script lang="ts">
+<script>
 import {
   IonPage,
   IonHeader,
@@ -66,6 +68,7 @@ import {
   IonInput,
 } from "@ionic/vue";
 import { useTodos } from "@/composables/useTodos";
+import BarcodeScanner from "./BarcodeScanner.vue";
 
 export default {
   name: "Todo",
@@ -82,6 +85,7 @@ export default {
     IonList,
     IonButton,
     IonInput,
+    BarcodeScanner
   },
   setup() {
     const { newTodo, todos, getTodos, addTodo, finishTodo, archiveTodo } = useTodos();
