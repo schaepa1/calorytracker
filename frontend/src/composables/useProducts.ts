@@ -10,12 +10,13 @@ export function useProducts() {
     const newProduct = ref<Product>({});
 
     const getProducts = async () => {
-        /*try {
+        console.log("DOING GETPRODUCTS");
+        try {
             products.value = await getAllProducts();
         } catch (error) {
             console.log(error); // FIXME: Errorhandling
-        }*/
-        products.value = [
+        }
+        /*products.value = [
             {
                 id: 1,
                 productName: 'Essen 1',
@@ -51,7 +52,7 @@ export function useProducts() {
                 productConsumeDate: new Date().toISOString().split('T')[0],
                 productConsumeTime: new Date().toLocaleTimeString().slice(0, 5),
                 productEan: '4 003994 477166',
-            },];
+            },];*/
     }
 
     const addProduct = async () => {

@@ -43,16 +43,16 @@ public class Product {
     public void setProductEan(long productEan) {
         this.productEan = productEan;
     }
-    public String getProductDate() {
+    public String getProductConsumeDate() {
         return productConsumeDate;
     }
-    public void setProductDate(String productConsumeDate) {
+    public void setProductConsumeDate(String productConsumeDate) {
         this.productConsumeDate = productConsumeDate;
     }
-    public String getProductConsumetime() {
+    public String getProductConsumeTime() {
         return productConsumeTime;
     }
-    public void setProductConsumetime(String productConsumeTime) {
+    public void setProductConsumeTime(String productConsumeTime) {
         this.productConsumeTime = productConsumeTime;
     }
     public User getUser() {
