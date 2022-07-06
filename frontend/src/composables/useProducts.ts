@@ -3,6 +3,7 @@ import { onMounted, ref } from 'vue';
 import { IonButton, IonContent, alertController } from '@ionic/vue';
 import { addNewProduct, getAllProducts, deleteProductWithID } from '@/api/products';
 import { useRouter } from 'vue-router';
+import axios from 'axios';
 
 export function useProducts() {
 
@@ -104,9 +105,34 @@ export function useProducts() {
         await getProducts(selectedDate.value);
     }
 
-    const getProductInfo = function () {
-        newProduct
-        addProduct()
+    const getProductInfo = async function () {
+        try 
+        {
+            let url = 'https://world.openfoodfacts.org/api/v2/product/'+ barcode.value;
+            const response = await axios.get(url);
+            newProduct.value.productName = response.data.product.product_name;
+            newProduct.value.productDescription = response.data.product.categories;
+            newProduct.value.productCalories = response.data.product.nutriments.energy;
+            let day = new Date().getDate();
+            let dayString = day.toString();
+            if(day < 10) {
+              dayString = "0" + dayString;
+            }
+            let month = new Date().getMonth()+1;
+            let monthString = month.toString();
+            if(month < 10) {
+              monthString = "0" + monthString;
+            }
+            let year = new Date().getFullYear();
+            let todayDate = dayString + "." + monthString + "." + year;
+
+            newProduct.value.productConsumeDate = todayDate;
+            newProduct.value.productConsumeDate = newProduct.value.productConsumeDate.split("-").reverse().join(".");
+            newProduct.value.productConsumeTime = new Date().getHours() + ":" + new Date().getMinutes()
+            addProduct();
+        } catch (error) {
+            return error;
+        }
     }
 
     const setBarcode = function (barcodeentry: any){
