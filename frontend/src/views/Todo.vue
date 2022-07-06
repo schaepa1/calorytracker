@@ -5,6 +5,7 @@
         <ion-title>Todos</ion-title>
       </ion-toolbar>
     </ion-header>
+
     <ion-content :fullscreen="true">
       <ion-header collapse="condense">
         <ion-toolbar>
@@ -12,42 +13,30 @@
         </ion-toolbar>
       </ion-header>
 
-      <barcode-scanner></barcode-scanner>
-      <ion-list>
-        <ion-item :key="todo" v-for="todo in todos">
-          <ion-grid>
-            <ion-row>
-              <ion-col>
-                {{ todo.title }}
-              </ion-col>
-              <ion-col>
-                <ion-button
-                  color="danger"
-                  v-if="!todo.done && !todo.archived"
-                  @click="finishTodo(todo)"
-                  >Finish</ion-button
-                >
-                <ion-button
-                  color="success"
-                  v-if="todo.done && !todo.archived"
-                  @click="archiveTodo(todo)"
-                  >Archive</ion-button
-                >
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-item>
-      </ion-list>
-      <ion-item>
-        <ion-input
-          type="text"
-          placeholder="New Todo Title"
-          v-model="newTodo.title"
-        ></ion-input>
-      </ion-item>
-      <div padding>
-        <ion-button @click="addTodo()">Add New ToDo</ion-button>
-      </div>
+     
+      <ion-grid>
+        <ion-row
+          :style="{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }"
+        >
+          <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+            <ion-item>
+              <ion-item>
+                 <barcode-scanner></barcode-scanner>
+                <ion-label position="stacked"> Barcode Nummer </ion-label>
+                <ion-input type="number" v-model="barcode.number" required>{{ this.$refs.decodedText }}</ion-input>
+              </ion-item>
+            </ion-item>
+            <div padding>
+                <ion-button size="large" @click="navigateProduct" expand="block">Produktinformationen sammeln</ion-button>
+              </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </ion-content>
   </ion-page>
 </template>
@@ -66,11 +55,13 @@ import {
   IonList,
   IonButton,
   IonInput,
+  IonLabel,
 } from "@ionic/vue";
 import { useTodos } from "@/composables/useTodos";
 import BarcodeScanner from "./BarcodeScanner.vue";
+import { defineComponent } from 'vue';
 
-export default {
+export default ({
   name: "Todo",
   components: {
     IonHeader,
@@ -85,12 +76,38 @@ export default {
     IonList,
     IonButton,
     IonInput,
-    BarcodeScanner
+    BarcodeScanner,
+    IonLabel
   },
-  setup() {
-    const { newTodo, todos, getTodos, addTodo, finishTodo, archiveTodo } = useTodos();
+  data() {
+    return {
+      barcode: {
+        number: "" 
+        //product info
+      },
+    };
+  },
+  methods: {
+    getProductInfo(bacodenumber) {
 
-    return { newTodo, todos, getTodos, addTodo, finishTodo, archiveTodo };
+    //   this.demands = {
+    //     weightKeep: 3000,
+    //     weightLose: 2600,
+    //     weightGain: 3500,
+    //   }
+    //   const config = {
+    //     withCredentials: true
+    //   }
+    //   axios.get(API_ROOT + '/api/users', config)
+    //     .then(response => {
+    //       this.demands.weightKeep = response.data.userWeightKeepCalories;
+    //       this.demands.weightLose = response.data.userWeightLoseCalories;
+    //       this.demands.weightGain = response.data.userWeightGainCalories;
+    //     })
+    },
   },
-};
+  mounted() {
+    this.getProductInfo();
+  },
+});
 </script>
