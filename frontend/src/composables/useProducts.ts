@@ -1,67 +1,51 @@
 import { Product } from '@/model/product';
 import { onMounted, ref } from 'vue';
 import { IonButton, IonContent, alertController } from '@ionic/vue';
-import { addNewProduct, getAllProducts } from '@/api/products';
+import { addNewProduct, getAllProducts, deleteProductWithID } from '@/api/products';
+import { useRouter } from 'vue-router';
 
 export function useProducts() {
 
-    const products = ref<Product[]>([]);
+    let products = ref<Product[]>([]);
 
-    const newProduct = ref<Product>({});
+    let newProduct = ref<Product>({});
 
-    const getProducts = async () => {
-        console.log("DOING GETPRODUCTS");
+    let selectedDate = ref<Date>(new Date());
+
+    let isOpenModal = ref<boolean>(false);
+
+    const router = useRouter();
+
+    const getProducts = async (date: Date) => {
         try {
-            products.value = await getAllProducts();
+            products.value = await getAllProducts(date);
         } catch (error) {
-            console.log(error); // FIXME: Errorhandling
+            console.log(error);
         }
-        /*products.value = [
-            {
-                id: 1,
-                productName: 'Essen 1',
-                productDescription: 'Beschreibung 1',
-                productCalories: 500,
-                productConsumeDate: new Date().toISOString().split('T')[0],
-                productConsumeTime: new Date().toLocaleTimeString().slice(0, 5),
-            },
-            {
-                id: 2,
-                productName: 'Essen 2',
-                productDescription: 'Beschreibung 2',
-                productCalories: 150,
-                productConsumeDate: new Date().toISOString().split('T')[0],
-                productConsumeTime: new Date().toLocaleTimeString().slice(0, 5),
-            },
-            {
-                id: 3,
-                productName: 'Essen 3',
-                productDescription: 'Beschreibung 3',
-                productCalories: 300,
-                productConsumeDate: new Date().toISOString().split('T')[0],
-                productConsumeTime: new Date().toLocaleTimeString().slice(0, 5),
-            },
-            {
-                id: 4,
-                productName: 'Essen 4',
-                productDescription: 'Beschreibung 4',
-                productCalories: 200,
-                productConsumeDate: new Date().toISOString().split('T')[0],
-                productConsumeTime: new Date().toLocaleTimeString().slice(0, 5),
-            },];*/
     }
 
     const addProduct = async () => {
         try {
-            // add the new todo and update the list of all todos afterwards
             let consumeDate = newProduct.value.productConsumeDate as string;
             let consumeDateFormatted = consumeDate.split("-").reverse().join(".");
             newProduct.value.productConsumeDate = consumeDateFormatted;
-            console.log(newProduct.value);
-            await addNewProduct(newProduct.value);
-            getProducts();
+            await addNewProduct(newProduct.value).then(async () => {
+                router.push('/tabs/dailyConsumption').then(async () => {
+                    await getProducts(selectedDate.value);
+                })
+            });
         } catch (error) {
-            console.log(error); // FIXME: Errorhandling
+            console.log(error);
+        }
+    }
+
+    const deleteProduct = async (id: any) => {
+        try {
+            await deleteProductWithID(id).then(async () => {
+                await getProducts(selectedDate.value);
+            });
+        } catch (error) {
+            console.log(error);
         }
     }
 
@@ -74,6 +58,7 @@ export function useProducts() {
     }
 
     const showConfirmDeletionAlert = async function (product: Product) {
+        console.log(product);
         const alert = await alertController.create({
             header: 'Eintrag löschen',
             message: 'Willst du ' + product.productName + ' vom ' + product.productConsumeDate + ' endgültig löschen?',
@@ -84,18 +69,13 @@ export function useProducts() {
                 {
                     text: 'Ja',
                     handler: () => {
-                        deleteProduct(product.id)
+                        deleteProduct(product.productId)
                     }
                 }
             ]
         });
         await alert.present();
     }
-
-    const deleteProduct = function (id: any) {
-        console.log("PRODUKT GELÖSCHT MIT ID", id);
-    }
-
 
     const calculateDailyTotalCalories = function () {
         let total = 0;
@@ -105,7 +85,24 @@ export function useProducts() {
         return total;
     }
 
-    onMounted(getProducts);
+    const closeModal = function () {
+        isOpenModal.value = false;
+    }
+
+    const openModal = function () {
+        isOpenModal.value = true;
+    }
+
+    const selectDate = function (date: any) {
+        selectedDate.value = new Date(date.detail.value);
+    }
+
+    const confirmModal = async function () {
+        closeModal();
+        await getProducts(selectedDate.value);
+    }
+
+    onMounted(() => getProducts(selectedDate.value));
 
     return {
         products,
@@ -116,5 +113,11 @@ export function useProducts() {
         deleteProduct,
         showConfirmDeletionAlert,
         checkAnyProductsToday,
+        isOpenModal,
+        closeModal,
+        openModal,
+        selectedDate,
+        selectDate,
+        confirmModal
     }
 }

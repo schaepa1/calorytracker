@@ -18,6 +18,10 @@ public class Product {
     @ManyToOne
     private User user;
     
+    public int getProductId() {
+        return productId;
+    }
+    
     public String getProductName() {
         return productName;
     }
