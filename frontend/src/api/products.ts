@@ -48,4 +48,3 @@ export async function deleteProductWithId(id: number): Promise<any> {
     return error;
   }
 }
-

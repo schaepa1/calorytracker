@@ -37,8 +37,8 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('@/views/DemandResults.vue')
       },
       {
-        path: 'todo',
-        component: () => import('@/views/Todo.vue')
+        path: 'scan',
+        component: () => import('@/views/Scan.vue')
       },
     ]
   }
