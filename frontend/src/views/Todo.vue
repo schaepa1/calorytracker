@@ -62,6 +62,7 @@ import BarcodeScanner from "./BarcodeScanner.vue";
 import { defineComponent } from 'vue';
 import { Product } from '@/model/product';
 import { addNewProduct} from '@/api/products';
+import { useProducts } from '@/composables/useProducts';
 
 export default ({
   name: "Todo",
