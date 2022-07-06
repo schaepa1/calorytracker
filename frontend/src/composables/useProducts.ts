@@ -1,7 +1,7 @@
 import { Product } from '@/model/product';
 import { onMounted, ref } from 'vue';
 import { IonButton, IonContent, alertController } from '@ionic/vue';
-import { addNewProduct, getAllProducts, deleteProductWithID } from '@/api/products';
+import { addNewProduct, getAllProducts, deleteProductWithId } from '@/api/products';
 import { useRouter } from 'vue-router';
 
 export function useProducts() {
@@ -14,11 +14,17 @@ export function useProducts() {
 
     let isOpenModal = ref<boolean>(false);
 
+    let totalCalories = ref<number>(0);
+
     const router = useRouter();
 
     const getProducts = async (date: Date) => {
         try {
             products.value = await getAllProducts(date);
+            totalCalories.value = 0;
+            products.value.forEach((product: any) => {
+                totalCalories.value += parseInt(product.productCalories, 10);
+            });
         } catch (error) {
             console.log(error);
         }
@@ -41,7 +47,7 @@ export function useProducts() {
 
     const deleteProduct = async (id: any) => {
         try {
-            await deleteProductWithID(id).then(async () => {
+            await deleteProductWithId(id).then(async () => {
                 await getProducts(selectedDate.value);
             });
         } catch (error) {
@@ -58,7 +64,6 @@ export function useProducts() {
     }
 
     const showConfirmDeletionAlert = async function (product: Product) {
-        console.log(product);
         const alert = await alertController.create({
             header: 'Eintrag löschen',
             message: 'Willst du ' + product.productName + ' vom ' + product.productConsumeDate + ' endgültig löschen?',
@@ -75,14 +80,6 @@ export function useProducts() {
             ]
         });
         await alert.present();
-    }
-
-    const calculateDailyTotalCalories = function () {
-        let total = 0;
-        products.value.forEach((product: any) => {
-            total += parseInt(product.productCalories, 10);
-        })
-        return total;
     }
 
     const closeModal = function () {
@@ -106,10 +103,10 @@ export function useProducts() {
 
     return {
         products,
+        totalCalories,
         newProduct,
         getProducts,
         addProduct,
-        calculateDailyTotalCalories,
         deleteProduct,
         showConfirmDeletionAlert,
         checkAnyProductsToday,

@@ -19,22 +19,25 @@
                 <ion-label position="stacked">
                   Kalorienbedarf zum abnehmen
                 </ion-label>
-                <ion-input disabled type="number" v-model="demands.weightLose" required></ion-input>
+                <ion-input disabled type="number" v-model="weightLose" required></ion-input>
               </ion-item>
               <ion-item>
                 <ion-label position="stacked">
                   Kalorienbedarf zum Gewicht halten
                 </ion-label>
-                <ion-input disabled type="number" v-model="demands.weightKeep" required></ion-input>
+                <ion-input disabled type="number" v-model="weightKeep" required></ion-input>
               </ion-item>
               <ion-item>
                 <ion-label position="stacked">
                   Kalorienbedarf zum zunehmen
                 </ion-label>
-                <ion-input disabled type="number" v-model="demands.weightGain" required></ion-input>
+                <ion-input disabled type="number" v-model="weightGain" required></ion-input>
               </ion-item>
-              <div padding>
-                <ion-button router-link="/tabs/demandCalculator" size="large" expand="block">Neu Berechnen</ion-button>
+              <div padding :style="{display: 'flex', flexDirection: 'row'}">
+                <ion-button :style="{flex: '1'}" router-link="/tabs/demandCalculator" size="large" expand="block">Neu Berechnen</ion-button>
+                <ion-button @click="getDemands" class="ion-float-right" size="large">
+                  <ion-icon :icon="refresh" />
+                </ion-button>
               </div>
             </div>
           </ion-col>
@@ -46,8 +49,6 @@
 
 <script>
 import { defineComponent } from 'vue';
-import axios from 'axios';
-import { API_ROOT } from "@/config/development";
 import {
   IonPage,
   IonHeader,
@@ -61,7 +62,10 @@ import {
   IonButton,
   IonInput,
   IonLabel,
+  IonIcon
 } from "@ionic/vue";
+import { useDemands } from '@/composables/useDemands';
+import { refresh } from "ionicons/icons";
 
 export default defineComponent({
   name: "DemandCalculator",
@@ -78,38 +82,11 @@ export default defineComponent({
     IonButton,
     IonInput,
     IonLabel,
+    IonIcon,
   },
-  data() {
-    return {
-      demands: {
-        weightKeep: 0,
-        weightLose: 0,
-        weightGain: 0,
-      },
-    };
-  },
-  methods: {
-    getDemands() {
-
-      this.demands = {
-        weightKeep: 3000,
-        weightLose: 2600,
-        weightGain: 3500,
-      }
-      const config = {
-        withCredentials: true
-      }
-      axios.get(API_ROOT + '/api/users', config)
-        .then(response => {
-          this.demands.weightKeep = response.data.userWeightKeepCalories;
-          this.demands.weightLose = response.data.userWeightLoseCalories;
-          this.demands.weightGain = response.data.userWeightGainCalories;
-        })
-    },
-  },
-
-  mounted() {
-    this.getDemands();
+  setup() {
+    const { weightKeep, weightLose, weightGain, getDemands } = useDemands();
+    return { weightKeep, weightLose, weightGain, getDemands, refresh };
   },
 });
 </script>

@@ -20,10 +20,8 @@ export async function getAllProducts(date: Date): Promise<Product[]> {
     let year = date.getFullYear();
     let todayDate = dayString + "." + monthString + "." + year;
     const response = await axios.get(API_ROOT + '/api/product/' + todayDate, config);
-    console.log("RESPONSE IST: ", response.data);
     return response.data;
   } catch (error) {
-    console.log(error);
     return <any>error;
   }
 }
@@ -40,7 +38,7 @@ export async function addNewProduct(newProduct: Product): Promise<any> {
   }
 }
 
-export async function deleteProductWithID(id: number): Promise<any> {
+export async function deleteProductWithId(id: number): Promise<any> {
   const config = {
     withCredentials: true
   }

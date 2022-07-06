@@ -19,22 +19,22 @@
                 <ion-label position="stacked">
                   Grösse (cm)
                 </ion-label>
-                <ion-input type="number" v-model="calculationData.height" required></ion-input>
+                <ion-input type="number" v-model="height" required></ion-input>
               </ion-item>
               <ion-item>
                 <ion-label position="stacked">
                   Gewicht (kg)
                 </ion-label>
-                <ion-input type="number" v-model="calculationData.weight" required></ion-input>
+                <ion-input type="number" v-model="weight" required></ion-input>
               </ion-item>
               <ion-item>
                 <ion-label position="stacked">
                   Alter (Jahre)
                 </ion-label>
-                <ion-input type="number" v-model="calculationData.age" required></ion-input>
+                <ion-input type="number" v-model="age" required></ion-input>
               </ion-item>
               <ion-list>
-                <ion-radio-group v-model="calculationData.sex" value="sex">
+                <ion-radio-group v-model="sex" value="sex">
                   <ion-item>
                     <ion-label>Geschlecht</ion-label>
                   </ion-item>
@@ -55,7 +55,7 @@
                   <ion-label position="stacked">
                     Deine körperliche Aktivität <br /> (1 = kaum aktiv, 4 = sehr aktiv)
                   </ion-label>
-                  <ion-select v-model="calculationData.activity" placeholder="Wie aktiv bist du körperlich?">
+                  <ion-select v-model="activity" placeholder="Wie aktiv bist du körperlich?">
                     <ion-select-option value=0.4>1</ion-select-option>
                     <ion-select-option value=0.7>2</ion-select-option>
                     <ion-select-option value=0.8>3</ion-select-option>
@@ -78,8 +78,7 @@
 
 <script>
 import { defineComponent } from 'vue';
-import axios from 'axios';
-import { API_ROOT } from "@/config/development";
+import { useDemands } from '@/composables/useDemands';
 import {
   IonPage,
   IonHeader,
@@ -96,7 +95,6 @@ import {
   IonRadio,
   IonRadioGroup,
   IonList,
-  IonListHeader,
   IonSelect,
   IonSelectOption,
 } from "@ionic/vue";
@@ -119,57 +117,12 @@ export default defineComponent({
     IonRadio,
     IonRadioGroup,
     IonList,
-    IonListHeader,
     IonSelect,
     IonSelectOption,
   },
-  data() {
-    return {
-      calculationData: {
-        height: null,
-        weight: null,
-        age: null,
-        sex: '',
-        activity: null,
-      },
-    };
+  setup() {
+    const { height, weight, age, sex, activity, calculateDemand } = useDemands();
+    return { height, weight, age, sex, activity, calculateDemand };
   },
-  methods: {
-    calculateDemand () {
-      let grundumsatz = 66.5 + (13.75 * this.calculationData.weight) + (5 * this.calculationData.height) - (6.76 * this.calculationData.age);
-      this.calculationData.sex == "f" ? grundumsatz *= 0.9 : grundumsatz *= 1;
-      const leistungsumsatz = grundumsatz * this.calculationData.activity;
-      const gesamtbedarf = grundumsatz + leistungsumsatz;
-      const weightKeepCalories = gesamtbedarf;
-      const weightLoseCalories = gesamtbedarf - 400;
-      const weightGainCalories = gesamtbedarf + 500;
-      this.saveCaloryDemands(weightKeepCalories, weightLoseCalories, weightGainCalories);
-      console.log("BEDARF IST", gesamtbedarf);
-      this.calculationData = {
-        height: null,
-        weight: null,
-        age: null,
-        sex: '',
-        activity: null,
-      };
-    },
-
-    saveCaloryDemands(weightKeep, weightLose, weightGain) {
-      console.log(weightKeep, weightLose, weightGain);
-      const config = {
-        withCredentials: true
-      }
-      try {
-        const demands = {
-          userWeightKeepCalories: weightKeep,
-          userWeightLoseCalories: weightLose,
-          userWeightGainCalories: weightGain,
-        }
-        axios.put(API_ROOT + '/api/users', demands, config);
-      } catch (error) {
-        return error;
-      }
-    },
-  }
 });
 </script>

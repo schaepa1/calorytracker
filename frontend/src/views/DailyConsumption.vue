@@ -2,13 +2,10 @@
   <ion-page>
     <ion-header>
       <ion-toolbar>
-        <div :style="{display: 'flex', flexDirection: 'row', alignItems: 'center'}">
-          <ion-title>Tageskonsum vom</ion-title>
-          <ion-button @click="openModal" :style="{ paddingLeft: '15px' }">
-            <ion-text>
-              {{ selectedDate.toJSON().slice(0, 10).split("-").reverse().join(".") }}
-            </ion-text>
-          </ion-button>
+        <div :style="{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start' }">
+          <ion-title :style="{ flex: '0.1' }">Tageskonsum vom {{ selectedDate.toJSON().slice(0,
+              10).split("-").reverse().join(".")
+          }}</ion-title>
         </div>
       </ion-toolbar>
 
@@ -28,13 +25,17 @@
                   Tageskonsum
                 </ion-title>
               </ion-toolbar>
-              <ion-button @click="openModal" :style="{ paddingLeft: '15px' }">
+            </ion-header>
+            <div padding :style="{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', paddingLeft: '8px', paddingRight: '8px'}">
+              <ion-button @click="openModal">
                 <ion-text>
                   {{ selectedDate.toJSON().slice(0, 10).split("-").reverse().join(".") }}
                 </ion-text>
               </ion-button>
-            </ion-header>
-
+              <ion-button @click="getProducts(selectedDate)" class="ion-float-right">
+                <ion-icon :icon="refresh" />
+              </ion-button>
+            </div>
             <ion-card :key="product.productId" v-for="product in products">
               <ion-grid>
                 <ion-row>
@@ -91,7 +92,7 @@
                     </ion-col>
                     <ion-col>
                       <h1 class="ion-float-right" style="font-size: 30px">
-                        <b> {{ calculateDailyTotalCalories() }} kcal</b>
+                        <b> {{ totalCalories }} kcal</b>
                       </h1>
                     </ion-col>
                   </ion-row>
@@ -102,7 +103,7 @@
         </ion-row>
       </ion-grid>
 
-      <ion-modal ref="modal" :is-open="isOpenModal">
+      <ion-modal can-dismiss="false" ref="modal" :is-open="isOpenModal">
         <ion-header>
           <ion-toolbar>
             <ion-title>Datum auswählen</ion-title>
@@ -144,7 +145,7 @@ import {
 } from "@ionic/vue";
 import { defineComponent } from "vue";
 import { useProducts } from "@/composables/useProducts";
-import { trash } from "ionicons/icons";
+import { trash, refresh } from "ionicons/icons";
 
 export default defineComponent({
   name: "DailyConsumption",
@@ -173,7 +174,7 @@ export default defineComponent({
     const {
       products,
       getProducts,
-      calculateDailyTotalCalories,
+      totalCalories,
       showConfirmDeletionAlert,
       checkAnyProductsToday,
       isOpenModal,
@@ -186,8 +187,9 @@ export default defineComponent({
     return {
       products,
       getProducts,
-      calculateDailyTotalCalories,
+      totalCalories,
       trash,
+      refresh,
       showConfirmDeletionAlert,
       checkAnyProductsToday,
       isOpenModal,
