@@ -14,6 +14,8 @@ export function useProducts() {
 
     let isOpenModal = ref<boolean>(false);
 
+    let barcode = ref<number>();
+
     const router = useRouter();
 
     const getProducts = async (date: Date) => {
@@ -102,6 +104,11 @@ export function useProducts() {
         await getProducts(selectedDate.value);
     }
 
+    const getProductInfo = function () {
+        newProduct
+        addProduct()
+    }
+
     onMounted(() => getProducts(selectedDate.value));
 
     return {
@@ -118,6 +125,8 @@ export function useProducts() {
         openModal,
         selectedDate,
         selectDate,
-        confirmModal
+        confirmModal,
+        barcode,
+        getProductInfo
     }
 }

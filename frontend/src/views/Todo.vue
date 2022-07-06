@@ -28,11 +28,11 @@
               <ion-item>
                  <barcode-scanner></barcode-scanner>
                 <ion-label position="stacked"> Barcode Nummer </ion-label>
-                <ion-input type="number" v-model="barcode.number" required>{{ this.$refs.decodedText }}</ion-input>
+                <ion-input type="number" v-model="barcode" required>{{ this.$refs.decodedText }}</ion-input>
               </ion-item>
             </ion-item>
             <div padding>
-                <ion-button size="large" @click="navigateProduct" expand="block">Produktinformationen sammeln</ion-button>
+                <ion-button size="large" @click="getProductInfo" expand="block">Produktinformationen sammeln</ion-button>
               </div>
           </ion-col>
         </ion-row>
@@ -60,6 +60,8 @@ import {
 import { useTodos } from "@/composables/useTodos";
 import BarcodeScanner from "./BarcodeScanner.vue";
 import { defineComponent } from 'vue';
+import { Product } from '@/model/product';
+import { addNewProduct} from '@/api/products';
 
 export default ({
   name: "Todo",
@@ -79,35 +81,9 @@ export default ({
     BarcodeScanner,
     IonLabel
   },
-  data() {
-    return {
-      barcode: {
-        number: "" 
-        //product info
-      },
-    };
-  },
-  methods: {
-    getProductInfo(bacodenumber) {
-
-    //   this.demands = {
-    //     weightKeep: 3000,
-    //     weightLose: 2600,
-    //     weightGain: 3500,
-    //   }
-    //   const config = {
-    //     withCredentials: true
-    //   }
-    //   axios.get(API_ROOT + '/api/users', config)
-    //     .then(response => {
-    //       this.demands.weightKeep = response.data.userWeightKeepCalories;
-    //       this.demands.weightLose = response.data.userWeightLoseCalories;
-    //       this.demands.weightGain = response.data.userWeightGainCalories;
-    //     })
-    },
-  },
-  mounted() {
-    this.getProductInfo();
-  },
+  setup() {
+    const { newProduct, addProduct, barcode, getProductInfo} = useProducts();
+    return { newProduct, addProduct, barcode, getProductInfo};
+  }
 });
 </script>
