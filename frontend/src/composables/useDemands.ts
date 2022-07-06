@@ -1,4 +1,4 @@
-import { onMounted, ref } from 'vue';
+import { onMounted, onUpdated, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { getUserDemands, saveNewDemands } from '@/api/demand';
 
@@ -61,7 +61,7 @@ export function useDemands() {
     }
   }
 
-  onMounted(() => getDemands());
+  onUpdated(() => getDemands());
 
   return {
     height,

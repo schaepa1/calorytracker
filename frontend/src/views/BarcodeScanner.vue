@@ -1,10 +1,9 @@
 <template>
   <h2>Bitte Barcode in die Kamera halten</h2>
   <StreamBarcodeReader @decode="onDecode" @loaded="onLoaded"></StreamBarcodeReader>
-  <h2>{{ decodedText }}</h2>
 </template>
 
-<script lang="ts">
+<script>
 import { defineComponent, ref } from 'vue';
 
 import { StreamBarcodeReader } from "vue-barcode-reader";
@@ -16,13 +15,13 @@ export default defineComponent({
   },
   setup(props, context) {
 
-    const decodedText = ref("32");
+    const decodedText = ref("");
 
     const onLoaded = () => {
       console.log("loaded");
     };
 
-    const onDecode = (text: any) => {
+    const onDecode = (text) => {
       decodedText.value = text;
     };
 

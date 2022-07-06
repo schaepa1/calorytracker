@@ -24,7 +24,7 @@
             <ion-item>
               <ion-item>
                 <barcode-test ref="barcoder"></barcode-test>
-                <ion-label position="stacked"> Barcode Nummer </ion-label>
+                <ion-label position="stacked"><h1>Barcode Nummer</h1></ion-label>
                 <ion-input type="number" v-model="barcode" required>
                   <p v-if="this.$refs.barcoder">
                     {{ setBarcode(this.$refs.barcoder.decodedText) }}
@@ -59,11 +59,7 @@ import {
   IonInput,
   IonLabel,
 } from "@ionic/vue";
-import { useTodos } from "@/composables/useTodos";
 import BarcodeTest from "./BarcodeScanner.vue";
-import { defineComponent } from "vue";
-import { Product } from "@/model/product";
-import { addNewProduct } from "@/api/products";
 import { useProducts } from "@/composables/useProducts";
 
 export default {

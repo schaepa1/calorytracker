@@ -29,16 +29,16 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('@/views/NewProduct.vue')
       },
       {
+        path: 'scan',
+        component: () => import('@/views/Scan.vue')
+      },
+      {
         path: 'demandCalculator',
         component: () => import('@/views/DemandCalculator.vue')
       },
       {
         path: 'demandResults',
         component: () => import('@/views/DemandResults.vue')
-      },
-      {
-        path: 'scan',
-        component: () => import('@/views/Scan.vue')
       },
     ]
   }

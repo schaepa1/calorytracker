@@ -12,6 +12,10 @@
           <ion-icon :icon="add" />
           <ion-label>Produkt erfassen</ion-label>
         </ion-tab-button>
+        <ion-tab-button tab="scan" href="/tabs/scan">
+          <ion-icon :icon="barcodeSharp" />
+          <ion-label>Produktscan</ion-label>
+        </ion-tab-button>
         <ion-tab-button tab="demandCalculator" href="/tabs/demandCalculator">
           <ion-icon :icon="calculator" />
           <ion-label>Bedarfsrechner</ion-label>
@@ -19,10 +23,6 @@
         <ion-tab-button tab="demandResults" href="/tabs/demandResults">
           <ion-icon :icon="person" />
           <ion-label>Mein Bedarf</ion-label>
-        </ion-tab-button>
-        <ion-tab-button tab="scan" href="/tabs/scan">
-          <ion-icon :icon="barcodeSharp" />
-          <ion-label>Produktscan</ion-label>
         </ion-tab-button>
       </ion-tab-bar>
     </ion-tabs>

@@ -1,5 +1,5 @@
 import { Product } from '@/model/product';
-import { onMounted, ref } from 'vue';
+import { onMounted, onUpdated, ref } from 'vue';
 import { IonButton, IonContent, alertController } from '@ionic/vue';
 import { addNewProduct, getAllProducts, deleteProductWithId } from '@/api/products';
 import { useRouter } from 'vue-router';
@@ -132,11 +132,10 @@ export function useProducts() {
     }
 
     const setBarcode = function (barcodeentry: any){
-        barcode = barcodeentry;
-        console.log("set barcode to "+barcode)
+        barcode.value = barcodeentry;
     }
 
-    onMounted(() => getProducts(selectedDate.value));
+    onUpdated(() => getProducts(selectedDate.value));
 
     return {
         products,

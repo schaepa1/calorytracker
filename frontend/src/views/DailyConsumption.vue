@@ -103,7 +103,7 @@
         </ion-row>
       </ion-grid>
 
-      <ion-modal can-dismiss="false" ref="modal" :is-open="isOpenModal">
+      <ion-modal v-on:ion-modal-did-dismiss="closeModal" ref="modal" :is-open="isOpenModal">
         <ion-header>
           <ion-toolbar>
             <ion-title>Datum auswählen</ion-title>
