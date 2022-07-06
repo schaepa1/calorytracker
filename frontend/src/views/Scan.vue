@@ -2,18 +2,15 @@
   <ion-page>
     <ion-header>
       <ion-toolbar>
-        <ion-title>Todos</ion-title>
+        <ion-title>Produkt einscannen</ion-title>
       </ion-toolbar>
     </ion-header>
-
     <ion-content :fullscreen="true">
       <ion-header collapse="condense">
         <ion-toolbar>
-          <ion-title size="large">Todos</ion-title>
+          <ion-title size="large">Produkt einscannen</ion-title>
         </ion-toolbar>
       </ion-header>
-
-     
       <ion-grid>
         <ion-row
           :style="{
@@ -26,21 +23,26 @@
           <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
             <ion-item>
               <ion-item>
-                 <barcode-scanner></barcode-scanner>
+                <barcode-test ref="barcoder"></barcode-test>
                 <ion-label position="stacked"> Barcode Nummer </ion-label>
-                <ion-input type="number" v-model="barcode" required>{{ this.$refs.decodedText }}</ion-input>
+                <ion-input type="number" v-model="barcode" required>
+                  <p v-if="this.$refs.barcoder">
+                    {{ setBarcode(this.$refs.barcoder.decodedText) }}
+                  </p>
+                </ion-input>
               </ion-item>
             </ion-item>
             <div padding>
-                <ion-button size="large" @click="getProductInfo" expand="block">Produktinformationen sammeln</ion-button>
-              </div>
+              <ion-button size="large" @click="getProductInfo" expand="block"
+                >Produktinformationen sammeln</ion-button
+              >
+            </div>
           </ion-col>
         </ion-row>
       </ion-grid>
     </ion-content>
   </ion-page>
 </template>
-
 <script>
 import {
   IonPage,
@@ -58,13 +60,13 @@ import {
   IonLabel,
 } from "@ionic/vue";
 import { useTodos } from "@/composables/useTodos";
-import BarcodeScanner from "./BarcodeScanner.vue";
-import { defineComponent } from 'vue';
-import { Product } from '@/model/product';
-import { addNewProduct} from '@/api/products';
-import { useProducts } from '@/composables/useProducts';
+import BarcodeTest from "./BarcodeScanner.vue";
+import { defineComponent } from "vue";
+import { Product } from "@/model/product";
+import { addNewProduct } from "@/api/products";
+import { useProducts } from "@/composables/useProducts";
 
-export default ({
+export default {
   name: "Todo",
   components: {
     IonHeader,
@@ -79,12 +81,13 @@ export default ({
     IonList,
     IonButton,
     IonInput,
-    BarcodeScanner,
-    IonLabel
+    BarcodeTest,
+    IonLabel,
   },
   setup() {
-    const { newProduct, addProduct, barcode, getProductInfo} = useProducts();
-    return { newProduct, addProduct, barcode, getProductInfo};
-  }
-});
+    const { newProduct, addProduct, barcode, getProductInfo, setBarcode } =
+      useProducts();
+    return { newProduct, addProduct, barcode, getProductInfo, setBarcode };
+  },
+};
 </script>

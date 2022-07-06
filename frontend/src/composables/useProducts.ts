@@ -109,6 +109,11 @@ export function useProducts() {
         addProduct()
     }
 
+    const setBarcode = function (barcodeentry: any){
+        barcode = barcodeentry;
+        console.log("set barcode to "+barcode)
+    }
+
     onMounted(() => getProducts(selectedDate.value));
 
     return {
@@ -127,6 +132,7 @@ export function useProducts() {
         selectDate,
         confirmModal,
         barcode,
-        getProductInfo
+        getProductInfo,
+        setBarcode
     }
 }

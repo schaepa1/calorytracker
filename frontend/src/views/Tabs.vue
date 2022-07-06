@@ -20,9 +20,9 @@
           <ion-icon :icon="person" />
           <ion-label>Mein Bedarf</ion-label>
         </ion-tab-button>
-        <ion-tab-button tab="todo" href="/tabs/todo">
-          <ion-icon :icon="flash" />
-          <ion-label>Todo</ion-label>
+        <ion-tab-button tab="scan" href="/tabs/scan">
+          <ion-icon :icon="barcodeSharp" />
+          <ion-label>Produktscan</ion-label>
         </ion-tab-button>
       </ion-tab-bar>
     </ion-tabs>
@@ -31,7 +31,7 @@
 
 <script lang="ts">
 import { IonTabBar, IonTabButton, IonTabs, IonLabel, IonIcon, IonPage, IonRouterOutlet } from '@ionic/vue';
-import { add, flash, apps, send, fastFood, calculator, person } from 'ionicons/icons';
+import { add, flash, apps, send, fastFood, calculator, person, barcodeSharp } from 'ionicons/icons';
 
 export default {
   name: 'Tabs',
@@ -44,7 +44,8 @@ export default {
       send,
       fastFood,
       calculator,
-      person
+      person,
+      barcodeSharp
     }
   }
 }
